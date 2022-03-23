@@ -19,6 +19,15 @@ export default class App extends Component {
                 render={(routerProps) => <MainPage {...routerProps} />}
               />
 
+              <Route path='/github' component={() => {
+                window.location.replace('https://github.com/SimonMilord');
+                return null;
+              }}/>
+
+              <Route path='/linkedin' component={() => {
+                window.location.replace('https://www.linkedin.com/in/simonmilord/');
+                return null;
+              }}/>
             </Switch>
             <Footer />
           </div>
