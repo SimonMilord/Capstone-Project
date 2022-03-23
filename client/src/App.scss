@@ -1,3 +1,7 @@
 @use "./styles/partials/reset" as *;
 @import "./styles/partials/variables";
 @import "./styles/partials/mixins";
+
+* {
+  box-sizing: border-box;
+}
