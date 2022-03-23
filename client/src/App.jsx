@@ -2,7 +2,7 @@ import "./App.scss";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/Main/MainPage";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/navBar";
 import Footer from "./components/Footer/footer";
 
 export default class App extends Component {
@@ -11,7 +11,6 @@ export default class App extends Component {
       <>
         <Router>
           <div className="App">
-            <h1>Stonkers test</h1>
             <NavBar />
             <Switch>
               <Route
