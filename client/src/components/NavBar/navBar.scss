@@ -7,55 +7,74 @@
   padding: 1rem;
   border-bottom: 1px solid black;
   @include tablet {
-    @include display-flex(row,space-between,center);
+    // @include display-flex(column,space-between,center);
     padding: 2rem;
+    justify-content: flex-start;
   }
 
-  .logo {
+  .nav {
+    width: 100%;
+    @include display-flex(row,space-between,center);
     @include tablet {
-      width: 20%;
     }
     &__img {
       height: 75px;
     }
-    &__title {
-      @include display-flex(row,center,center);
-      margin: 8px 0px;
+    &__left {
+      @include display-flex(row,flex-start,center);
+    }
+    &__link {
+      margin-left: 1rem;
+      display: none;
       @include tablet {
-        display: none;
+        display: flex;
+      }
+      &--signout {
+        display: flex;
       }
     }
   }
 
-  .search {
-    border: 1px solid black;
-    padding: 8px 8px 8px 8px;
-    width: 80%;
-    @include display-flex(row,flex-start,center);
-    margin: 8px 0px;
+  .navBar-bottom {
+    width: 100%;
     @include tablet {
-      width: 50%;
+      @include display-flex(column-reverse,center,center);
     }
-
-    &__input {
-      border: none;
-      padding: 0;
-      outline: none;
+    .search {
+      border: 1px solid black;
+      padding: 8px 8px 8px 8px;
       width: 100%;
-    }
-  }
+      @include display-flex(row,flex-start,center);
+      margin: 8px 0px;
+      @include tablet {
+        width: 70%;
+      }
 
-  .btns {
-    width: 80%;
-    @include display-flex(row,space-around,center);
-    margin: 8px 0px;
-    @include tablet {
-      justify-content: space-between;
-      width: 20%;
-      margin: 0;
+      &__input {
+        border: none;
+        padding: 0;
+        outline: none;
+        font-size: 20px;
+        height: 100%;
+        width: 100%;
+        color: grey; // TO CHANGE LATER
+      }
     }
-    &__link {
 
+    .btns {
+      width: 100%;
+      @include display-flex(row,space-around,center);
+      margin: 1rem 0rem 0.5rem 0rem;
+      @include tablet {
+        justify-content: space-between;
+        width: 20%;
+        margin: 0;
+      }
+      &__link {
+        @include tablet {
+          display: none;
+        }
+      }
     }
   }
 }
