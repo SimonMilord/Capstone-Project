@@ -14,9 +14,9 @@ export default function Quote(props) {
         </div>
       </div>
       <div className='quote__bottom'>
-        <p className='quote__price'>$158.89$</p>
-        <p className='quote__var quote__var--perc'>8.91%</p>
-        <p className='quote__var quote__var--doll'>+10.27</p>
+        <p className='quote__price'>$171.13</p>
+        <p className='quote__var quote__var--perc'>0.50%</p>
+        <p className='quote__var quote__var--doll'>+0.84</p>
       </div>
     </div>
   );

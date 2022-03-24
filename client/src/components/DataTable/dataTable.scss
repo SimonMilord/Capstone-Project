@@ -2,8 +2,25 @@
 @import "../../styles/partials/mixins";
 @import "../../styles/partials/variables";
 
-.dataTable {
-  border: 1px solid black;
-  height: 20rem;
-  width: 10rem;
+.data {
+  // border: 1px solid black;
+  padding:1rem;
+  // margin: 1rem;
+  @include tablet {
+    padding: 2rem;
+  }
+  &__item {
+    @include display-flex(row,space-between,center);
+    padding: 0.5rem;
+    border-top: 1px solid black;
+  }
+  &__name {
+
+  }
+  &__value {
+
+    &--rec {
+
+    }
+  }
 }
