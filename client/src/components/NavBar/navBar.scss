@@ -1,0 +1,61 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.navBar {
+  @include display-flex(column,center,center);
+  padding: 1rem;
+  border-bottom: 1px solid black;
+  @include tablet {
+    @include display-flex(row,space-between,center);
+    padding: 2rem;
+  }
+
+  .logo {
+    @include tablet {
+      width: 20%;
+    }
+    &__img {
+      height: 75px;
+    }
+    &__title {
+      @include display-flex(row,center,center);
+      margin: 8px 0px;
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  .search {
+    border: 1px solid black;
+    padding: 8px 8px 8px 8px;
+    width: 80%;
+    @include display-flex(row,flex-start,center);
+    margin: 8px 0px;
+    @include tablet {
+      width: 50%;
+    }
+
+    &__input {
+      border: none;
+      padding: 0;
+      outline: none;
+      width: 100%;
+    }
+  }
+
+  .btns {
+    width: 80%;
+    @include display-flex(row,space-around,center);
+    margin: 8px 0px;
+    @include tablet {
+      justify-content: space-between;
+      width: 20%;
+      margin: 0;
+    }
+    &__link {
+
+    }
+  }
+}
