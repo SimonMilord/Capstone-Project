@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/Main/MainPage";
 import Footer from "./components/Footer/footer";
-import WatchlistPage from './pages/Watchlist/WatchlistPage';
-import LoginPage from './pages/Login/LoginPage';
-import SignUpPage from './pages/SignUp/SignUpPage';
+import WatchlistPage from "./pages/Watchlist/WatchlistPage";
+import LoginPage from "./pages/Login/LoginPage";
+import SignUpPage from "./pages/SignUp/SignUpPage";
 
 export default class App extends Component {
   render() {
@@ -14,9 +14,13 @@ export default class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-            <Route
+              <Route
                 path="/"
                 exact
+                render={(routerProps) => <MainPage {...routerProps} />}
+              />
+              <Route
+                path="/main"
                 render={(routerProps) => <MainPage {...routerProps} />}
               />
               <Route
@@ -31,20 +35,31 @@ export default class App extends Component {
               />
               <Route
                 path="/watchlist"
-                exact
                 render={(routerProps) => <WatchlistPage {...routerProps} />}
               />
+              {/* IN CASE I MAKE IT POSSIBLE TO ADD MORE THAN 1 WATCHLIST */}
+              {/* <Route
+                path="/watchlist/:id"
+                render={(routerProps) => <WatchlistPage {...routerProps} />}
+              /> */}
 
+              <Route
+                path="/github"
+                component={() => {
+                  window.location.replace("https://github.com/SimonMilord");
+                  return null;
+                }}
+              />
 
-              <Route path='/github' component={() => {
-                window.location.replace('https://github.com/SimonMilord');
-                return null;
-              }}/>
-
-              <Route path='/linkedin' component={() => {
-                window.location.replace('https://www.linkedin.com/in/simonmilord/');
-                return null;
-              }}/>
+              <Route
+                path="/linkedin"
+                component={() => {
+                  window.location.replace(
+                    "https://www.linkedin.com/in/simonmilord/"
+                  );
+                  return null;
+                }}
+              />
             </Switch>
             <Footer />
           </div>
