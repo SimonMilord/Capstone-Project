@@ -1,0 +1,33 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.stock {
+  @include display-flex(row,space-between,center);
+  border-top: 1px solid black;
+  padding: 1rem 0rem;
+  &-box {
+    @include display-flex(row,space-between,center);
+    width: 90%;
+  }
+  &__left {
+    width: 50%;
+    @include display-flex(row, space-between, center);
+    @include tablet {
+    }
+  }
+
+  &__right {
+    @include display-flex(row,flex-end,center);
+    width: 50%;
+  }
+
+  &__data {
+    width: 50%;
+    // display: flex;
+    // justify-content: flex-end;
+  }
+  &__delBtn {
+    margin-left: 2rem;
+  }
+}

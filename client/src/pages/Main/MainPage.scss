@@ -2,3 +2,6 @@
 @import "../../styles/partials/mixins";
 @import "../../styles/partials/variables";
 
+.mainPage {
+  @include paddingSection;
+}

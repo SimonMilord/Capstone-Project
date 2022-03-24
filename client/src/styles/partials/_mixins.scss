@@ -24,3 +24,10 @@
   justify-content: $justify;
   align-items: $align;
 }
+
+@mixin paddingSection {
+  padding: 1rem;
+  @include tablet {
+    padding: 2rem;
+  }
+}

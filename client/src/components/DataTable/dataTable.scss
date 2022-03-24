@@ -3,11 +3,11 @@
 @import "../../styles/partials/variables";
 
 .data {
-  // border: 1px solid black;
-  padding:1rem;
-  // margin: 1rem;
+  margin-top: 2rem;
   @include tablet {
+    border: 1px solid black;
     padding: 2rem;
+    margin: 1rem 0rem;
   }
   &__item {
     @include display-flex(row,space-between,center);

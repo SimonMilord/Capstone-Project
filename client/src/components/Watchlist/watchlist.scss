@@ -1,0 +1,22 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.watchlist {
+  @include paddingSection;
+  &-top {
+    @include display-flex(row,space-between,center);
+    margin-bottom: 2rem;
+  }
+
+  .labels {
+    // @include display-flex(row,space-between,center);
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 1rem;
+    &__item {
+      width: 25%;
+    }
+  }
+}
