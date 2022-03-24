@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/Main/MainPage";
 import Footer from "./components/Footer/footer";
 import WatchlistPage from './pages/Watchlist/WatchlistPage';
+import LoginPage from './pages/Login/LoginPage';
+import SignUpPage from './pages/SignUp/SignUpPage';
 
 export default class App extends Component {
   render() {
@@ -12,10 +14,20 @@ export default class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              <Route
+            <Route
                 path="/"
                 exact
                 render={(routerProps) => <MainPage {...routerProps} />}
+              />
+              <Route
+                path="/login"
+                exact
+                render={(routerProps) => <LoginPage {...routerProps} />}
+              />
+              <Route
+                path="/signup"
+                exact
+                render={(routerProps) => <SignUpPage {...routerProps} />}
               />
               <Route
                 path="/watchlist"

@@ -1,3 +1,31 @@
 @import "../../styles/partials/fonts";
 @import "../../styles/partials/mixins";
 @import "../../styles/partials/variables";
+
+.loginPage {
+  @include display-flex(column,center,center);
+  height: 100vh;
+
+  .login {
+    border: 1px solid black;
+    padding: 2rem;
+    @include display-flex(column,center,center);
+    &__logo {
+      @include display-flex(column,center,center);
+      margin-bottom: 2rem;
+    }
+    &__img {
+      height: 75px;
+    }
+    &__form {
+      @include display-flex(column,center,center);
+    }
+
+    &__input {
+      margin: 0.5rem 0rem;
+    }
+    &__btn {
+      margin: 0.5rem 0rem;
+    }
+  }
+}
