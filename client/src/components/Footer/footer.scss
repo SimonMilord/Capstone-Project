@@ -5,6 +5,7 @@
 
 .footer {
   position: absolute;
+  padding: 1rem;
   bottom: 0;
   width: 100%;
   @include display-flex(row,space-between,center);

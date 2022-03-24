@@ -4,12 +4,14 @@
 
 .loginPage {
   @include display-flex(column,center,center);
-  height: 100vh;
+  margin-top: 10rem;
 
   .login {
-    border: 1px solid black;
     padding: 2rem;
     @include display-flex(column,center,center);
+    @include tablet {
+      border: 1px solid black;
+    }
     &__logo {
       @include display-flex(column,center,center);
       margin-bottom: 2rem;
