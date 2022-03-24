@@ -1,0 +1,12 @@
+[{
+  "userID": "231254389593894729374",
+  "username": "simonmilord",
+  "password": "insert hashed password here",
+  "watchlist": [
+    {
+      "companyName": "Apple Inc.",
+      "ticker": "AAPL",
+      "currentPrice": 158.98
+    }
+  ]
+}]

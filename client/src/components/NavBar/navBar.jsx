@@ -2,6 +2,8 @@ import React from 'react';
 import './navBar.scss';
 import { Link} from "react-router-dom";
 import Logo from "../../assets/Logo/stonkers-logo.png";
+import SearchIcon from '@mui/icons-material/Search';
+
 
 export default function NavBar(props) {
   return (
@@ -12,7 +14,7 @@ export default function NavBar(props) {
       </div>
       <div className='search'>
         <input className="search__input" type="text" name="" placeholder='Search...' />
-        <img className='search__icon' src="" alt="search icon"></img>
+        <SearchIcon color="action"/>
       </div>
       <div className='btns'>
         <Link to="/watchlist" className="btns__link btns__link--watchlist" >Watchlist</Link>

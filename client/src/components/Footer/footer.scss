@@ -1,0 +1,28 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  @include display-flex(row,flex-end,center);
+  border-top: 1px solid black;
+  padding: 1rem;
+  &__text {
+
+  }
+
+  &__box {
+    margin-left: 0.5rem;
+
+  }
+  &__link {
+    margin-left: 0.5rem;
+
+  }
+  &__img {
+    height: 32px;
+  }
+}
