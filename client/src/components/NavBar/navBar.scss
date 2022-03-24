@@ -7,7 +7,6 @@
   padding: 1rem;
   border-bottom: 1px solid black;
   @include tablet {
-    // @include display-flex(column,space-between,center);
     padding: 2rem;
     justify-content: flex-start;
   }

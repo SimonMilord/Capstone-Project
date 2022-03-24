@@ -1,0 +1,35 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.quote {
+  padding: 1rem;
+  @include tablet {
+    padding: 2rem;
+  }
+  &__top {
+    @include display-flex(row,space-between,center);
+    margin-bottom: 1.5rem;
+    @include tablet {
+      border-bottom: 1px solid black;
+      padding: 0.5rem 0rem;
+    }
+  }
+  &__ticker {
+    margin-bottom: 0.5rem;
+    font-size: 24px;
+  }
+  &__exchange {
+    font-size: 14px;
+  }
+  &__name {
+    font-size: 18px;
+  }
+  &__bottom {
+    @include display-flex(row,flex-start,center);
+    width:100%;
+    p {
+      margin-right: 1rem;
+    }
+  }
+}
