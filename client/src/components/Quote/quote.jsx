@@ -15,8 +15,8 @@ export default function Quote(props) {
       </div>
       <div className='quote__bottom'>
         <p className='quote__price'>${props.quote.c}</p>
-        <p className='quote__var quote__var--perc'>{props.quote.dp.toFixed(2)}%</p>
-        <p className='quote__var quote__var--doll'>{props.quote.d.toFixed(2)}</p>
+        <p className='quote__var quote__var--perc'>{Number(props.quote.dp).toFixed(2)}%</p>
+        <p className='quote__var quote__var--doll'>{Number(props.quote.d).toFixed(2)}</p>
       </div>
     </div>
   );

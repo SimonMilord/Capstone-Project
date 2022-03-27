@@ -27,18 +27,17 @@ export default class MainPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log("component updated");
-    // console.log(prevState);
-    // console.log(this.state.stockName);
-    // if (prevState.stockName !== this.state.stockName) {
-    //   this.getStockName();
-    // }
+  //   // if (prevState.stockName !== this.state.stockName) {
+  //   //   this.getStockName();
+  //   // }
   }
 
   handleQuoteData = (quote) => {
-    this.getStockName(quote);
     this.getStockQuote(quote);
+    this.getStockName(quote);
   }
 
+  // API call to get Name and symbol of the company
   getStockName(symbol) {
     axios
       .get(`${URL}/search?q=${symbol}&token=${KEY}`)
@@ -52,8 +51,8 @@ export default class MainPage extends Component {
         console.error(err);
       })
   }
-
-  getStockQuote = (symbol) => {
+  // API call to get current price, percent change and $ change
+  getStockQuote(symbol) {
     axios
       .get(`${URL}/quote?symbol=${symbol}&token=${KEY}`)
       .then((res) => {
@@ -72,7 +71,7 @@ export default class MainPage extends Component {
       <>
         <NavBar
         getQuote = {this.handleQuoteData}
-        getStockName = {this.getStockName}
+        // getStockName = {this.getStockName} // WHY WE PASS THIS? maybe the reason of latency
         />
         <div className='mainPage'>
           <div className='mainPage-top'>
