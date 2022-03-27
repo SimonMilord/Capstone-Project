@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar/navBar";
 import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
+// import { getTableHeadUtilityClass } from "@mui/material";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
@@ -12,7 +13,7 @@ const defaultStock = "AAPL";
 
 export default class MainPage extends Component {
   state = {
-    stock: "AAPL",
+    stock: defaultStock,
     stockName: "APPLE INC",
     stockQuote: {},
     stockFinancials: {},
@@ -20,6 +21,7 @@ export default class MainPage extends Component {
     stockNews: {},
     stockRatings: {},
     stockRecommendation: "",
+    stockChartData: {},
   };
 
   // Life cycle methods
@@ -30,7 +32,7 @@ export default class MainPage extends Component {
     this.getStockFinancials(defaultStock);
     this.getStockProfile(defaultStock);
     this.getStockRatings(defaultStock);
-    // this.getRecommendation();
+    this.getStockPriceData(defaultStock); // Data required for the chart
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,7 +51,7 @@ export default class MainPage extends Component {
     this.getStockFinancials(quote);
     this.getStockProfile(quote);
     this.getStockRatings(quote);
-    // this.getRecommendation();
+    this.getStockPriceData(quote); // Data required for the chart
   };
 
   // API call to get Name and symbol of the company
@@ -166,6 +168,23 @@ export default class MainPage extends Component {
       });
   }
 
+    // API call to get the 5 years stock price data for the chart
+    getStockPriceData(symbol) {
+      const from5 = 1616651622;
+      const today = 1648187622;
+
+      axios
+        .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from5}&to=${today}&token=${KEY}`)
+        .then((res) => {
+          this.setState(() => ({
+            stockChartData: res.data,
+          }));
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    }
+
   render() {
     document.title = this.state.stock
       ? `Stonkers - ${this.state.stock}`
@@ -183,7 +202,9 @@ export default class MainPage extends Component {
             />
           </div>
           <div className="mainPage-bottom">
-            <Graph />
+            <Graph
+              chartData={this.state.stockChartData}
+            />
             <DataTable
               quote={this.state.stockQuote}
               financials={this.state.stockFinancials}
