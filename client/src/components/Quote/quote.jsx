@@ -6,7 +6,7 @@ export default function Quote(props) {
     <div className='quote'>
       <div className='quote__top'>
         <div className='quote__company'>
-          <div className='quote__ticker'>{props.symbol} - <span className='quote__exchange'>NYSE</span></div>
+          <div className='quote__ticker'>{props.symbol} - <span className='quote__exchange'>{props.profile.exchange}</span></div>
           <div className='quote__name'>{props.name}</div>
         </div>
         <div className='quote__btn'>
@@ -14,7 +14,7 @@ export default function Quote(props) {
         </div>
       </div>
       <div className='quote__bottom'>
-        <p className='quote__price'>${props.quote.c}</p>
+        <p className='quote__price'>${props.quote.c} (USD)</p>
         <p className='quote__var quote__var--perc'>{Number(props.quote.dp).toFixed(2)}%</p>
         <p className='quote__var quote__var--doll'>{Number(props.quote.d).toFixed(2)}</p>
       </div>

@@ -2,40 +2,47 @@ import React from 'react';
 import './dataTable.scss';
 
 export default function DataTable(props) {
+  const fin = props.financials.metric;
+  const avgVol = '10DayAverageTradingVolume';
+  const yearLow = '52WeekLow';
+  const yearHigh = '52WeekHigh';
+  // console.log(fin);
+
   return (
     <div className='data'>
-      {/* <h2>Data on Apple Inc.</h2> */}
       <div className='data__item'>
         <p className='data__name'>Previous close</p>
-        <div className='data__value'>170.21</div>
+        <div className='data__value'>{Number(props.quote.pc).toFixed(2)}</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Day range</p>
-        <div className='data__value'>170.21 - 172.35</div>
+        <div className='data__value'>{Number(props.quote.l).toFixed(2)} - {" "}
+        {Number(props.quote.h).toFixed(2)}</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Year range</p>
-        <div className='data__value'>118.86 - 182.94</div>
+        {/* <div className='data__value'>{Number(fin.yearLow).toFixed(2)} - {" "}
+        {Number(fin.yearHigh).toFixed(2)}</div> */}
       </div>
       <div className='data__item'>
         <p className='data__name'>Average volume</p>
-        <div className='data__value'>93,428,037</div>
+        {/* <div className='data__value'>{fin.avgVol}</div> */}
       </div>
       <div className='data__item'>
-        <p className='data__name'>Market capitalization</p>
-        <div className='data__value'>2.792T</div>
+        <p className='data__name'>Market capitalization (Bn)</p>
+        <div className='data__value'>{Number(props.profile.marketCapitalization/1000).toFixed(3)}B</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Beta</p>
-        <div className='data__value'>1.19</div>
+        {/* <div className='data__value'>{Number(fin.beta).toFixed(2)}</div> */}
       </div>
       <div className='data__item'>
         <p className='data__name'>P/E ratio</p>
-        <div className='data__value'>28.44</div>
+        {/* <div className='data__value'>28.44</div> */}
       </div>
       <div className='data__item'>
         <p className='data__name'>Recommendation</p>
-        <div className='data__value data__value--rec'>BUY</div>
+        <div className='data__value data__value--rec'>{props.recommendation}</div>
       </div>
     </div>
   );
