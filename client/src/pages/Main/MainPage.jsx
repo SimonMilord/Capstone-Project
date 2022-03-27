@@ -23,6 +23,7 @@ export default class MainPage extends Component {
   // Life cycle methods
   componentDidMount() {
     console.log("component mounted");
+    this.getStockQuote(this.state.stock);
   }
 
   componentDidUpdate(prevProps, prevState) {
