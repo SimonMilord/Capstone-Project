@@ -12,14 +12,14 @@ const defaultStock = "AAPL";
 
 export default class MainPage extends Component {
   state = {
-    stock: "",
-    stockName: "",
+    stock: "AAPL",
+    stockName: "APPLE INC",
     stockQuote: {},
     stockFinancials: {},
     stockProfile: {},
     stockNews: {},
     stockRatings: {},
-    stockRecommendation: "BUY",
+    stockRecommendation: "",
   };
 
   // Life cycle methods
@@ -35,9 +35,11 @@ export default class MainPage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // console.log("component updated");
-    //   // if (prevState.stockName !== this.state.stockName) {
-    //   //   this.getStockName();
-    //   // }
+    // if (prevState.stock !== this.state.stock) {
+    //   console.log("different");
+    // } else {
+    //   console.log("same");
+    // }
   }
 
   // functions that call API request functions once a stock is searched
@@ -59,6 +61,7 @@ export default class MainPage extends Component {
           stockName: res.data.result[0].description,
           stock: res.data.result[0].symbol,
         });
+        console.log('fetched name');
       })
       .catch((err) => {
         console.error(err);
@@ -72,11 +75,12 @@ export default class MainPage extends Component {
         this.setState({
           stockQuote: res.data,
         });
+        console.log('fetched quote');
       })
       .catch((err) => {
         // console.error(err);
         alert(
-          "Hi!, Unfortunately the API doesn't allow for quotes, charts or recommendations for stocks from that country. Please search for US based stocks or try searching without the .TO"
+          "Hi!, Please note the current version only supports US stocks for now."
         );
         this.setState({
           stockQuote: {
@@ -99,6 +103,7 @@ export default class MainPage extends Component {
         this.setState({
           stockFinancials: res.data,
         });
+        console.log('fetched financials');
       })
       .catch((err) => {
         console.error(err);
@@ -113,6 +118,7 @@ export default class MainPage extends Component {
         this.setState({
           stockProfile: res.data,
         });
+        console.log('fetched profile');
       })
       .catch((err) => {
         console.error(err);
@@ -127,6 +133,7 @@ export default class MainPage extends Component {
         this.setState({
           stockRatings: res.data[0],
         });
+        console.log('fetched recommendations');
         // cleaning up the array of analyst ratings and
         // aggregating values for readability
         let arr = Object.values(this.state.stockRatings);
@@ -158,16 +165,6 @@ export default class MainPage extends Component {
         });
       });
   }
-  // METHOD IS RUNNING BEFORE THE ASYNC FUNCTIONS OF THE API CALL
-  // getRecommendation = () => {
-  //   const data = this.state.stockRatings;
-  //   const finalValue = "";
-  //   const buys = data.buy;
-  //   console.log(data);
-  //   this.setState({
-  //     stockRecommendation: finalValue,
-  //   });
-  // }
 
   render() {
     document.title = this.state.stock
@@ -179,9 +176,9 @@ export default class MainPage extends Component {
         <div className="mainPage">
           <div className="mainPage-top">
             <Quote
+              symbol={this.state.stock}
               quote={this.state.stockQuote}
               name={this.state.stockName}
-              symbol={this.state.stock}
               profile={this.state.stockProfile}
             />
           </div>

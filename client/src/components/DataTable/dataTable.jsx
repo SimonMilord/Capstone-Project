@@ -3,9 +3,9 @@ import './dataTable.scss';
 
 export default function DataTable(props) {
   const fin = props.financials.metric;
-  const avgVol = '10DayAverageTradingVolume';
-  const yearLow = '52WeekLow';
-  const yearHigh = '52WeekHigh';
+  // const avgVol = '10DayAverageTradingVolume';
+  // const yearLow = '52WeekLow';
+  // const yearHigh = '52WeekHigh';
   // console.log(fin);
 
   return (
@@ -29,7 +29,7 @@ export default function DataTable(props) {
         {/* <div className='data__value'>{fin.avgVol}</div> */}
       </div>
       <div className='data__item'>
-        <p className='data__name'>Market capitalization (Bn)</p>
+        <p className='data__name'>Market capitalization</p>
         <div className='data__value'>{Number(props.profile.marketCapitalization/1000).toFixed(3)}B</div>
       </div>
       <div className='data__item'>
@@ -38,7 +38,11 @@ export default function DataTable(props) {
       </div>
       <div className='data__item'>
         <p className='data__name'>P/E ratio</p>
-        {/* <div className='data__value'>28.44</div> */}
+        {/* <div className='data__value'>{fin.peNormalizedAnnual && fin.peNormalizedAnnual}</div> */}
+      </div>
+      <div className='data__item'>
+        <p className='data__name'>Dividend & yield</p>
+        {/* <div className='data__value'>{fin.dividendPerShareTTM} / {fin.dividendPerShareTTM / props.quote.c}%</div> */}
       </div>
       <div className='data__item'>
         <p className='data__name'>Recommendation</p>
