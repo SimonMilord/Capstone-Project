@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./navBar.scss";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/Logo/stonkers-logo.png";
