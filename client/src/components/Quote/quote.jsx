@@ -2,13 +2,28 @@ import React from "react";
 import "./quote.scss";
 
 export default function Quote(props) {
+
+  // Converts the exchange name to their accronyms
+  const findExchange = (param) => {
+    switch(param) {
+      case 'NEW YORK STOCK EXCHANGE, INC.':
+        return 'NYSE'
+      case 'NASDAQ NMS - GLOBAL MARKET':
+        return 'NASDAQ'
+      case 'TORONTO STOCK EXCHANGE':
+        return 'TSX'
+      default:
+        return 'N/A'
+    }
+  }
+
   return (
     <div className="quote">
       <div className="quote__top">
         <div className="quote__company">
           <div className="quote__ticker">
             {props.symbol} -{" "}
-            <span className="quote__exchange">{props.profile.exchange}</span>
+            <span className="quote__exchange">{findExchange(props.profile.exchange)}</span>
           </div>
           <div className="quote__name">{props.name}</div>
         </div>
