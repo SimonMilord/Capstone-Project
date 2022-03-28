@@ -35,19 +35,10 @@ export default class MainPage extends Component {
     this.getStockPriceData(defaultStock); // Data required for the chart
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // console.log("component updated");
-    // if (prevState.stock !== this.state.stock) {
-    //   console.log("different");
-    // } else {
-    //   console.log("same");
-    // }
-  }
-
   // functions that call API request functions once a stock is searched
   handleQuoteData = (quote) => {
-    this.getStockQuote(quote);
     this.getStockName(quote);
+    this.getStockQuote(quote);
     this.getStockFinancials(quote);
     this.getStockProfile(quote);
     this.getStockRatings(quote);

@@ -2,11 +2,11 @@ import React from 'react';
 import './dataTable.scss';
 
 export default function DataTable(props) {
-  const fin = props.financials.metric;
+  const fin = props.financials;
   // const avgVol = '10DayAverageTradingVolume';
   // const yearLow = '52WeekLow';
   // const yearHigh = '52WeekHigh';
-  // console.log(fin);
+  console.log(fin);
 
   return (
     <div className='data'>
@@ -34,7 +34,7 @@ export default function DataTable(props) {
       </div>
       <div className='data__item'>
         <p className='data__name'>Beta</p>
-        {/* <div className='data__value'>{Number(fin.beta).toFixed(2)}</div> */}
+        <div className='data__value'>{fin.metric && Number(fin.metric.beta).toFixed(2)}</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>P/E ratio</p>
