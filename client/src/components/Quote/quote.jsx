@@ -34,7 +34,7 @@ export default function Quote(props) {
         </div>
       </div>
       <div className="quote__bottom">
-        <p className="quote__price">${props.quote.c} (USD)</p>
+        <p className="quote__price">${Number(props.quote.c).toFixed(2)} (USD)</p>
         <p className={props.quote.dp > 0 ? "quote__var" : "quote__var--down"}>
           {Number(props.quote.dp).toFixed(2)}%
         </p>
