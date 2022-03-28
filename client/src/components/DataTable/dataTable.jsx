@@ -3,10 +3,10 @@ import './dataTable.scss';
 
 export default function DataTable(props) {
   const fin = props.financials;
-  // const avgVol = '10DayAverageTradingVolume';
-  // const yearLow = '52WeekLow';
-  // const yearHigh = '52WeekHigh';
-  console.log(fin);
+  const avgVol = '10DayAverageTradingVolume';
+  const yearLow = '52WeekLow';
+  const yearHigh = '52WeekHigh';
+  // console.log(fin.metric);
 
   return (
     <div className='data'>
@@ -21,12 +21,12 @@ export default function DataTable(props) {
       </div>
       <div className='data__item'>
         <p className='data__name'>Year range</p>
-        {/* <div className='data__value'>{Number(fin.yearLow).toFixed(2)} - {" "}
-        {Number(fin.yearHigh).toFixed(2)}</div> */}
+        <div className='data__value'>{fin.metric && Number(fin.metric["52WeekLow"]).toFixed(2)} - {" "}
+        {fin.metric && Number(fin.metric["52WeekHigh"]).toFixed(2)}</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Average volume</p>
-        {/* <div className='data__value'>{fin.avgVol}</div> */}
+        <div className='data__value'>{fin.metric && Number(fin.metric["10DayAverageTradingVolume"]).toFixed(2)}M</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Market capitalization</p>
@@ -38,11 +38,12 @@ export default function DataTable(props) {
       </div>
       <div className='data__item'>
         <p className='data__name'>P/E ratio</p>
-        {/* <div className='data__value'>{fin.peNormalizedAnnual && fin.peNormalizedAnnual}</div> */}
+        <div className='data__value'>{fin.metric && Number(fin.metric.peNormalizedAnnual).toFixed(2)}</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Dividend & yield</p>
-        {/* <div className='data__value'>{fin.dividendPerShareTTM} / {fin.dividendPerShareTTM / props.quote.c}%</div> */}
+        <div className='data__value'>{fin.metric && fin.metric.dividendsPerShareTTM ? fin.metric.dividendsPerShareTTM : "N/A"} /
+        {fin.metric ? Number(fin.metric.dividendsPerShareTTM / props.quote.c * 100).toFixed(2) : "N/A"}%</div>
       </div>
       <div className='data__item'>
         <p className='data__name'>Recommendation</p>
