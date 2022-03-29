@@ -12,11 +12,15 @@
     // border: none;
     font-weight: bold;
     margin-right: 1rem;
+    cursor: pointer;
     &:hover {
       color: $btn-hover-color;
     }
-    &:active {
-      border-bottom: 2px solid $btn-hover-color;
+    &:focus {
+      // border-bottom: 2px solid $btn-hover-color;
+      color: $global-white;
+      background-color: blue;
+      border-style: inset;
     }
   }
 

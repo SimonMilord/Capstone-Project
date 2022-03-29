@@ -16,6 +16,11 @@ export default function Quote(props) {
         return 'N/A'
     }
   }
+  // handler function to add stock to watchlist
+  const addStock = () => {
+    // console.log("added to watchlist");
+    props.addBtn();
+  }
 
   return (
     <div className="quote">
@@ -28,7 +33,7 @@ export default function Quote(props) {
           <div className="quote__name">{props.name}</div>
         </div>
         <div className="quote__btn">
-          <button className="quote__addBtn" type="submit">
+          <button className="quote__addBtn" type="button" onClick={addStock}>
             Add to watchlist
           </button>
         </div>

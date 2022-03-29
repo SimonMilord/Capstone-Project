@@ -24,7 +24,7 @@ export default function Graph(props) {
         grid: {
           display: false
         },
-        display: true
+        display: false
       },
       y: {
         grid: {

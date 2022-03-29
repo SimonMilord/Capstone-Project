@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './watchlist.scss';
 import StockItem from '../StockItem/stockItem';
 
@@ -7,7 +8,9 @@ export default function Watchlist(props) {
     <div className='watchlist'>
       <div className='watchlist-top'>
         <h1 className='watchlist__title'>Watchlist</h1>
-        <button className='watchlist__addBtn' type="submit">Add to watchlist</button>
+        <Link to="/">
+          <button className='watchlist__addBtn' type="button">Add to watchlist</button>
+        </Link>
       </div>
       <div className='labels'>
         <div className='labels__item'>
