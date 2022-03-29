@@ -4,4 +4,9 @@
 
 .mainPage {
   @include paddingSection;
+
+  &-top {
+    margin-bottom: 2rem;
+  }
 }
+
