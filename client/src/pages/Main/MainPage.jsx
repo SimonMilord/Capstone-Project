@@ -25,6 +25,10 @@ export default class MainPage extends Component {
 
   // Life cycle methods
   componentDidMount() {
+    const timestamp = 1616630400;
+    const newStamp = new Date(timestamp*1000).toLocaleDateString();
+
+    console.log(newStamp);
     // console.log("component mounted");
     this.getStockQuote(defaultStock);
     this.getStockName(defaultStock);

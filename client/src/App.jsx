@@ -9,6 +9,7 @@ import SignUpPage from "./pages/SignUp/SignUpPage";
 
 export default class App extends Component {
   render() {
+
     return (
       <>
         <Router>

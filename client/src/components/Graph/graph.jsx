@@ -7,28 +7,22 @@ import Chart from 'chart.js/auto';
 export default function Graph(props) {
 
   // console.log(props.chartData);
-  // const pricesArray = props.chartData.c;
-  // const labels = props.chartData.t;
+  const pricesArray = props.chartData.c;
+  const labels = (props.chartData.t).map(item => new Date(item*1000).toLocaleDateString());
 
   // console.log(pricesArray);
-  // console.log(timeArray);
-  const data = [1];
+  // console.log(labels);
   return (
     <div className='graph'>
       <Line
         datasetIdKey='id'
         data={{
-          labels: ['Jun', 'Jul', 'Aug'],
+          labels: labels,
           datasets: [
             {
               id: 1,
               label: '',
-              data: [],
-            },
-            {
-              id: 2,
-              label: '',
-              data: [],
+              data: pricesArray,
             },
           ],
         }}
