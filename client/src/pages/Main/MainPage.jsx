@@ -5,7 +5,6 @@ import NavBar from "../../components/NavBar/navBar";
 import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
-// import { getTableHeadUtilityClass } from "@mui/material";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
