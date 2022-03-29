@@ -1,0 +1,23 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.time {
+  padding: 1rem 0rem;
+  &__container {
+
+  }
+  &__btn {
+    // background-color: $global-white;
+    // border: none;
+    font-weight: bold;
+    margin-right: 1rem;
+    &:hover {
+      color: $btn-hover-color;
+    }
+    &:active {
+      border-bottom: 2px solid $btn-hover-color;
+    }
+  }
+
+}

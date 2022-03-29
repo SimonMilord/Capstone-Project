@@ -5,6 +5,7 @@ import NavBar from "../../components/NavBar/navBar";
 import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
+import TimeSelector from "../../components/TimeSelector/timeSelector";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
@@ -192,9 +193,12 @@ export default class MainPage extends Component {
             />
           </div>
           <div className="mainPage-bottom">
-            <Graph
-              chartData={this.state.stockChartData}
-            />
+            <div className="line-chart">
+              <TimeSelector />
+              <Graph
+                chartData={this.state.stockChartData}
+              />
+            </div>
             <DataTable
               quote={this.state.stockQuote}
               financials={this.state.stockFinancials}
