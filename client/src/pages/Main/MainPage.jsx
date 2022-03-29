@@ -199,7 +199,7 @@ export default class MainPage extends Component {
   render() {
     document.title = this.state.stock
       ? `Stonkers - ${this.state.stock}`
-      : "Stonkers";
+      : "Stonkers"
     return (
       <>
         <NavBar getQuote={this.handleQuoteData} />

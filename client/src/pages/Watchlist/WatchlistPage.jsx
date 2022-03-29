@@ -5,6 +5,7 @@ import NavBar from '../../components/NavBar/navBar';
 
 export default class WatchlistPage extends Component {
   render() {
+
     return (
       <>
         <NavBar />

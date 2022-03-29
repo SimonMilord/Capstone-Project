@@ -8,19 +8,21 @@
 
   }
   &__btn {
-    // background-color: $global-white;
-    // border: none;
+    background-color: $global-white;
+    border: none;
     font-weight: bold;
     margin-right: 1rem;
     cursor: pointer;
     &:hover {
       color: $btn-hover-color;
     }
-    &:focus {
-      // border-bottom: 2px solid $btn-hover-color;
-      color: $global-white;
-      background-color: blue;
-      border-style: inset;
+    &--active {
+      border: none;
+      border-bottom: 2px solid $btn-hover-color;
+      color: $btn-hover-color;
+      background-color: $global-white;
+      font-weight: bold;
+      margin-right: 1rem;
     }
   }
 

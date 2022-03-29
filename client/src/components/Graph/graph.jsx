@@ -40,9 +40,10 @@ const data = {
       id: 1,
       label: '',
       data: pricesArray,
-      borderColor: "blue",
+      borderColor: "#4379FF",
       pointRadius: 0,
       pointHoverRadius: 6,
+      tension: 0.5,
     },
   ],
 }
