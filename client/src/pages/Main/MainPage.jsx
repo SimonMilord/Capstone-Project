@@ -6,10 +6,13 @@ import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
 import TimeSelector from "../../components/TimeSelector/timeSelector";
+import { defaultListboxReducer } from "@mui/base";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
 const defaultStock = "AAPL";
+const defaultTime = (new Date().setFullYear(new Date().getFullYear() - 1)/1000).toFixed();
+const today = (Date.now()/1000).toFixed();
 
 export default class MainPage extends Component {
   state = {
@@ -22,6 +25,7 @@ export default class MainPage extends Component {
     stockRatings: {},
     stockRecommendation: "",
     stockChartData: {},
+    fromPeriod: defaultTime,
   };
 
   // Life cycle methods
@@ -32,8 +36,10 @@ export default class MainPage extends Component {
     this.getStockFinancials(defaultStock);
     this.getStockProfile(defaultStock);
     this.getStockRatings(defaultStock);
-    this.getStockPriceData(defaultStock); // Data required for the chart
+    this.getStockPriceData(defaultStock, defaultTime); // Data required for the chart
   }
+
+  // ----- HANDLING FUNCTIONS -----
 
   // functions that call API request functions once a stock is searched
   handleQuoteData = (quote) => {
@@ -42,8 +48,18 @@ export default class MainPage extends Component {
     this.getStockFinancials(quote);
     this.getStockProfile(quote);
     this.getStockRatings(quote);
-    this.getStockPriceData(quote); // Data required for the chart
+    this.getStockPriceData(quote, this.state.fromPeriod); // Data required for the chart
   };
+
+  //functions that handles time period for graph
+  handleTimeData = (period) => {
+    this.setState({
+      fromPeriod: period,
+    });
+    this.getStockPriceData(this.state.stock, this.state.fromPeriod);
+  }
+
+  // ----- API CALLS -----
 
   // API call to get Name and symbol of the company
   getStockName(symbol) {
@@ -160,16 +176,16 @@ export default class MainPage extends Component {
   }
 
     // API call to get the 5 years stock price data for the chart
-    getStockPriceData(symbol) {
-      const from5 = 1616651622;
-      const today = 1648187622;
-
+    getStockPriceData(symbol, from) {
+      console.log(today);
+      console.log(from);
       axios
-        .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from5}&to=${today}&token=${KEY}`)
+        .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${today}&token=${KEY}`)
         .then((res) => {
           this.setState(() => ({
             stockChartData: res.data,
           }));
+          console.log(res);
         })
         .catch((err) => {
           console.error(err);
@@ -194,7 +210,7 @@ export default class MainPage extends Component {
           </div>
           <div className="mainPage-bottom">
             <div className="line-chart">
-              <TimeSelector />
+              <TimeSelector getTime={this.handleTimeData}/>
               <Graph
                 chartData={this.state.stockChartData}
               />
