@@ -6,8 +6,8 @@
 .footer {
   position: absolute;
   padding: 1rem;
-  bottom: 0;
   width: 100%;
+  bottom: 0;
   @include display-flex(row,space-between,center);
   border-top: 1px solid black;
   @include paddingSection;

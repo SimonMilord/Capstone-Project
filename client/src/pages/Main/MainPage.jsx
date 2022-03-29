@@ -54,7 +54,7 @@ export default class MainPage extends Component {
           stockName: res.data.result[0].description,
           stock: res.data.result[0].symbol,
         });
-        console.log('fetched name');
+        // console.log('fetched name');
       })
       .catch((err) => {
         console.error(err);
@@ -68,7 +68,7 @@ export default class MainPage extends Component {
         this.setState({
           stockQuote: res.data,
         });
-        console.log('fetched quote');
+        // console.log('fetched quote');
       })
       .catch((err) => {
         // console.error(err);
@@ -77,12 +77,12 @@ export default class MainPage extends Component {
         );
         this.setState({
           stockQuote: {
-          "c": "N/A",
-          "d": null,
-          "dp": null,
-          "h": null,
-          "l": null,
-          "pc": null,
+            "c": "N/A",
+            "d": null,
+            "dp": null,
+            "h": null,
+            "l": null,
+            "pc": null,
           }
         });
       });
@@ -96,7 +96,7 @@ export default class MainPage extends Component {
         this.setState({
           stockFinancials: res.data,
         });
-        console.log('fetched financials');
+        // console.log('fetched financials');
       })
       .catch((err) => {
         console.error(err);
@@ -111,7 +111,7 @@ export default class MainPage extends Component {
         this.setState({
           stockProfile: res.data,
         });
-        console.log('fetched profile');
+        // console.log('fetched profile');
       })
       .catch((err) => {
         console.error(err);
@@ -126,7 +126,7 @@ export default class MainPage extends Component {
         this.setState({
           stockRatings: res.data[0],
         });
-        console.log('fetched recommendations');
+        // console.log('fetched recommendations');
         // cleaning up the array of analyst ratings and
         // aggregating values for readability
         let arr = Object.values(this.state.stockRatings);

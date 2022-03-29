@@ -3,9 +3,6 @@ import './dataTable.scss';
 
 export default function DataTable(props) {
   const fin = props.financials;
-  const avgVol = '10DayAverageTradingVolume';
-  const yearLow = '52WeekLow';
-  const yearHigh = '52WeekHigh';
   // console.log(fin.metric);
 
   return (
