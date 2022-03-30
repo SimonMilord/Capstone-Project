@@ -3,11 +3,24 @@ require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const usersRoutes = require('./routes/usersRoutes');
+const User = require('./models/user');
+const { db } = require('./models/user');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-
-mongoose.connect('mongodb://localhost:8080/stonkers');
+// put in env password
+mongoose.connect('mongodb+srv://stonkers_user:uFfdaWY5sYHXb3QR@stonkers.9ivjh.mongodb.net/myFirstDatabase').then(
+   () => {
+    console.log('success');
+    let user = new User({
+      username: "simon",
+      password: 'test1234',
+      watchlist: []
+    });
+    user.save();
+  }, (err) => {
+    console.log(`${err} failed to connect`);
+  });
 
 // middleware
 app.use(cors());

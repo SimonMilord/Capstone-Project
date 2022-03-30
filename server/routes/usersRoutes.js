@@ -15,12 +15,15 @@ router.post('/signup', async (req, res) => {
   const user = new User({
     username: req.body.username,
     password: req.body.password,
-    watchlist: []
+    watchlist: [{
+      symbol: "",
+      name: "",
+    }]
   })
   try {
     // if successful, save user to DB and send the get user by ID route
    user = await user.save();
-   res.redirect(`/user/${user.id}`);
+   res.redirect(`/`);
   } catch (err) {
     console.error(err);
   }
@@ -46,13 +49,14 @@ router.post('/signout', (req, res) => {
 // ----- WATCHLIST ROUTES -----
 
 // POST add to watchlist
-router.post('/', (req, res) => {
+router.post('/:id/watchlist', (req, res) => {
 
 });
 
 // DELETE stock from watchlist
-router.delete('/watchlist', (req, res) => {
+router.delete('/:id/watchlist/:symbol', (req, res) => {
 
 });
 
+// when login implemented: "/watchlist"
 module.exports = router;

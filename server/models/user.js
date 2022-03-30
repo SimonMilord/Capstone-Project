@@ -8,11 +8,11 @@ const userSchema = new Schema({
   password: {type: String, unique: false, required: true},
   watchlist: {
     type: [{
-      symbol: {type: Number, unique: true, required: true},
-      name: {type: Number, unique: true, required: true}
+      symbol: {type: String, unique: true, required: false},
+      name: {type: String, unique: true, required: false}
   }],
   unique: false,
-  required: false}
+  required: true}
 })
 
 
