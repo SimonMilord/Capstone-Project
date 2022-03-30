@@ -4,13 +4,46 @@ import Watchlist from '../../components/Watchlist/watchlist';
 import NavBar from '../../components/NavBar/navBar';
 
 export default class WatchlistPage extends Component {
+
+  state = {
+    userWatchlist: [
+      {
+        id: "1",
+        symbol: "AAPL",
+        name: "Apple Inc."
+      },
+      {
+        id: "2",
+        symbol: "GOOG",
+        name: "Alphabet Inc."
+      },
+      {
+        id: "3",
+        symbol: "MSFT",
+        name: "Microsoft Inc."
+      },
+      {
+        id: "4",
+        symbol: "ACN",
+        name: "Accenture Inc."
+      },
+      {
+        id: "5",
+        symbol: "CSGP",
+        name: "Costar Inc."
+      }
+    ],
+  }
+
   render() {
 
     return (
       <>
         <NavBar />
         <div className='watchlistPage'>
-          <Watchlist />
+          <Watchlist
+            watchlist = {this.state.userWatchlist}
+          />
         </div>
       </>
     );

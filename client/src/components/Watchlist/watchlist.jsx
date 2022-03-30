@@ -27,12 +27,14 @@ export default function Watchlist(props) {
         </div>
       </div>
       <ul className='watchlist__list'>
-        <li className='watchlist__item'>
-          <StockItem />
-        </li>
-        <li className='watchlist__item'>
-          <StockItem />
-        </li>
+        {props.watchlist && props.watchlist.map((stockItem) => (
+          <li className='watchlist__item' key={stockItem.id}>
+            <StockItem
+              symbol = {stockItem.symbol}
+              name = {stockItem.name}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

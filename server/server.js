@@ -13,9 +13,14 @@ mongoose.connect('mongodb+srv://stonkers_user:uFfdaWY5sYHXb3QR@stonkers.9ivjh.mo
    () => {
     console.log('success');
     let user = new User({
-      username: "simon",
-      password: 'test1234',
-      watchlist: []
+      username: "simon2",
+      password: 'test12345',
+      watchlist: [
+        {
+          symbol: "GOOG",
+          name: "Alphabet Inc."
+        }
+      ]
     });
     user.save();
   }, (err) => {
