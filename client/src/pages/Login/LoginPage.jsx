@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.scss';
-import Logo from '../../assets/Logo/stonkers-logo.png';
+import Logo from '../../assets/Logo/stonkers-logo.svg';
 
 export default class LoginPage extends Component {
   render() {

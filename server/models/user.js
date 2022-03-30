@@ -1,0 +1,32 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+const bcrypt = require('bcrypt');
+
+// Define the user schema
+const userSchema = new Schema({
+  username: {type: String, unique: false, required: true},
+  password: {type: String, unique: false, required: true},
+  watchlist: {
+    type: [{
+      symbol: {type: Number, unique: true, required: true},
+      name: {type: Number, unique: true, required: true}
+  }],
+  unique: false,
+  required: false}
+})
+
+
+// Schema methods
+userSchema.methods = {
+  confirmPassword: function (password) {
+    return bcrypt.compareSync(password, this.password);
+  },
+  hashPassword: plainPassword => {
+    return bcrypt.hashSync(plainPassword, 12);
+  }
+};
+
+// compiling user schema into a model
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./navBar.scss";
 import { NavLink } from "react-router-dom";
-import Logo from "../../assets/Logo/stonkers-logo.png";
+import Logo from "../../assets/Logo/stonkers-logo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function NavBar(props) {

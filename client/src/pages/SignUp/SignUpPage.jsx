@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./SignUpPage.scss";
-import Logo from '../../assets/Logo/stonkers-logo.png';
+import Logo from '../../assets/Logo/stonkers-logo.svg';
 import { Link } from 'react-router-dom';
 
 export default class SignUpPage extends Component {

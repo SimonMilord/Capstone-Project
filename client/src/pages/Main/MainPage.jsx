@@ -60,7 +60,12 @@ export default class MainPage extends Component {
   }
 
   handleAddStock = () => {
-
+    const stockObject = {
+      symbol: this.state.stock,
+      name: this.state.stockName,
+    }
+    // PUSH the stockObject to DB!
+    console.log(stockObject);
   }
 
   // ----- API CALLS -----
