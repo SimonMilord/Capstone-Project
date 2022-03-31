@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const serverURL = process.env.REACT_APP_SERVER_URL;
+// console.log(serverURL);
 
 export default class SignUpPage extends Component {
 
@@ -24,7 +25,7 @@ export default class SignUpPage extends Component {
       password: password,
       confirm: confirmPass
     }).then(response => {
-      // console.log('in response');
+      console.log("New User profile created");
       window.location = '/login'
     }).catch(err => console.log("sign up error", err))
   }

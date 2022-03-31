@@ -27,21 +27,27 @@ export default class LoginPage extends Component {
       username: username,
       password: password
     }).then(response => {
-      // console.log(response.data.token); // test
+      console.log(response);
       sessionStorage.setItem('clientAuthToken', response.data.token);
-      this.state.isLoggedIn = true; // not sure here
+      this.setState({
+        isLoggedIn: true
+      }); // not sure here
       this.fetchProfile(response.data.token);
+      // window.location = '/'
     }).catch(err => console.log("login error", err))
   }
 
   fetchProfile = (token) => {
+    // console.log(token);
     axios.get(`${serverURL}/`, { // not sure id here
       headers: {
         authorization: `Bearer ${token}`
       }
     }).then(response => {
+      sessionStorage.setItem('username', response.data.username);
+      console.log(response);
       this.setState({
-        isLoggedIn: true,
+        // isLoggedIn: true,
         profile: response.data
       });
       window.location = '/' // redirects to main page after fetching profile

@@ -9,11 +9,7 @@ const jwt = require("jsonwebtoken");
 // GET a user by ID
 router.get("/", (req, res) => {
   // const targetUser = User.findOne({id: req.params.id}); // not sure
-  (user, res) => {
-    res.json({
-
-    });
-  }
+    res.json(req.jwtPayload);
 })
 
 // POST a new user signing up
@@ -27,14 +23,14 @@ router.post('/signup', async (req, res) => {
       username: req.body.username,
       password: req.body.password,
       watchlist: [{
-        symbol: "",
-        name: "",
+        symbol: null, //for now
+        name: null,
       }]
     })
     try {
       // if successful, save user to DB and send the get user by ID route
      user = await user.save();
-     res.redirect(`/`);
+     res.send("logged in");
     } catch (err) {
       console.error(err);
     }
@@ -45,6 +41,7 @@ router.post('/signup', async (req, res) => {
 // POST Login request
 router.post('/login',async(req, res, next) => {
   const foundUser = await User.findOne({username: req.body.username}).exec();
+  console.log(req.jwtPayload);
   if (!foundUser) {
     return res.status(403).json({message: "No such user."});
   }
@@ -53,7 +50,7 @@ router.post('/login',async(req, res, next) => {
     const token = jwt.sign({
       username: foundUser.username,
      }, `${process.env.JWT_SECRET}`, {expiresIn: '30d'});
-     return res.json({token: token});
+     return res.json({token: token, userData: req.jwtPayload});
 // need to put token in header
   } else {
     return res.status(403).json({message: 'Invalid username or password.'});
