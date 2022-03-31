@@ -14,11 +14,6 @@ export default class LoginPage extends Component {
     profile: null
   }
 
-  componentDidMount() {
-    const authToken = sessionStorage.getItem('clientAuthToken');
-    // this.fetchProfile(authToken);
-  }
-
   handleLogin = (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -27,30 +22,26 @@ export default class LoginPage extends Component {
       username: username,
       password: password
     }).then(response => {
-      console.log(response);
       sessionStorage.setItem('clientAuthToken', response.data.token);
       this.setState({
         isLoggedIn: true
-      }); // not sure here
+      });
       this.fetchProfile(response.data.token);
-      // window.location = '/'
     }).catch(err => console.log("login error", err))
   }
 
   fetchProfile = (token) => {
-    // console.log(token);
-    axios.get(`${serverURL}/`, { // not sure id here
+    axios.get(`${serverURL}/`, {
       headers: {
         authorization: `Bearer ${token}`
       }
     }).then(response => {
       sessionStorage.setItem('username', response.data.username);
-      console.log(response);
+      // console.log(response.data);
       this.setState({
-        // isLoggedIn: true,
         profile: response.data
       });
-      window.location = '/' // redirects to main page after fetching profile
+      window.location = '/'
     }).catch(err => console.log('Profile-error', err))
   }
 

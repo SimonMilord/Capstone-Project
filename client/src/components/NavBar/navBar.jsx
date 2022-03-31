@@ -12,7 +12,7 @@ export default function NavBar(props) {
     e.target.searchedStock.value = "";
   };
 
-  const handleSignout = (e) => {
+  const handleSignout = () => {
     sessionStorage.clear();
   }
 

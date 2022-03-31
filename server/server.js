@@ -41,13 +41,10 @@ const authorize = (req, res, next) => {
     next();
   } else {
     if(!req.headers.authorization) {
-      // console.log("something1");
       return res.status(401).json({message: 'Token not found'});
     }
     const authTokenArray = req.headers.authorization.split(' ');
-    // console.log(authTokenArray.length);
     if (authTokenArray[0].toLowerCase() !== 'bearer' && authTokenArray.length !== 2) {
-      // console.log("something2");
       console.log(req.headers.authorization);
       return res.status(401).json({message: 'Invalid token.'});
     }
@@ -64,7 +61,7 @@ const authorize = (req, res, next) => {
     });
   }
 }
-// insert authorize
+
 app.use(authorize);
 app.use('/user', usersRoutes);
 
