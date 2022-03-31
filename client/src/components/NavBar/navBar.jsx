@@ -13,7 +13,7 @@ export default function NavBar(props) {
   };
 
   const handleSignout = (e) => {
-    // add some log out logic here
+    sessionStorage.clear();
   }
 
   return (
