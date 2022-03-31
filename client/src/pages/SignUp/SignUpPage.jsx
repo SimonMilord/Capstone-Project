@@ -18,10 +18,12 @@ export default class SignUpPage extends Component {
             placeholder='Username'>
             </input>
             <input className='signup__input signup__input--password'
+            type="password"
             name="password"
             placeholder='Password'>
             </input>
             <input className='signup__input signup__input--cpassword'
+            type="password"
             name="confirm"
             placeholder='Confirm password'>
             </input>

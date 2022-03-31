@@ -6,6 +6,7 @@ import NavBar from '../../components/NavBar/navBar';
 export default class WatchlistPage extends Component {
 
   state = {
+    // userWatchlist: [],
     userWatchlist: [
       {
         id: "1",
@@ -34,6 +35,9 @@ export default class WatchlistPage extends Component {
       }
     ],
   }
+
+  // NEED function to fetch a user watchlist from the DB and set it in the state
+
 
   render() {
 

@@ -18,6 +18,7 @@ export default class LoginPage extends Component {
             placeholder='Username'>
             </input>
             <input className='login__input login__input--password'
+            type="password"
             name="password"
             placeholder='Password'>
             </input>
