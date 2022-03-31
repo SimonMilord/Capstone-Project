@@ -2,8 +2,33 @@ import React, { Component } from 'react';
 import "./SignUpPage.scss";
 import Logo from '../../assets/Logo/stonkers-logo.svg';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const serverURL = process.env.REACT_APP_SERVER_URL;
 
 export default class SignUpPage extends Component {
+
+  state = {
+
+  }
+
+  handleRegister(event) {
+    event.preventDefault();
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    const confirmPass = event.target.confirm.value;
+
+    // TO VERIFY
+    axios.post(`${serverURL}/signup`, {
+      username: username,
+      password: password,
+      confirm: confirmPass
+    }).then(response => {
+      // console.log('in response');
+      window.location = '/login'
+    }).catch(err => console.log("sign up error", err))
+  }
+
   render() {
     return (
       <div className='signUpPage'>
@@ -12,8 +37,9 @@ export default class SignUpPage extends Component {
             <img className='signup__img' src={Logo} alt="stonkers logo"></img>
             <h1 className='signup__title'>Stonkers</h1>
           </div>
-          <form className='signup__form'>
+          <form className='signup__form' onSubmit={this.handleRegister}>
             <input className='signup__input signup__input--username'
+            type="text"
             name="username"
             placeholder='Username'>
             </input>

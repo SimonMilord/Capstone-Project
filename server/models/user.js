@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 
 // Define the user schema
 const userSchema = new Schema({
-  username: {type: String, unique: false, required: true},
+  username: {type: String, unique: true, required: true},
   password: {type: String, unique: false, required: true},
   watchlist: {
     type: [{
-      symbol: {type: String, unique: true, required: false},
-      name: {type: String, unique: true, required: false}
+      symbol: {type: String, unique: false, required: false},
+      name: {type: String, unique: false, required: false}
   }],
   unique: false,
   required: true}

@@ -12,6 +12,9 @@ export default function NavBar(props) {
     e.target.searchedStock.value = "";
   };
 
+  const handleSignout = (e) => {
+    // add some log out logic here
+  }
 
   return (
     <div className="navBar">
@@ -35,6 +38,7 @@ export default function NavBar(props) {
           to="/login"
           className="nav__link nav__link--signout"
           tabIndex={3}
+          onClick={handleSignout}
         >
           Sign out
         </NavLink>
