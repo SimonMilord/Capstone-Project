@@ -4,7 +4,6 @@ import "./watchlist.scss";
 import StockItem from "../StockItem/stockItem";
 import axios from "axios";
 
-let currentUser = sessionStorage.getItem('username');
 let clientAuthToken = sessionStorage.getItem('clientAuthToken');
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
@@ -24,7 +23,6 @@ export default function Watchlist(props) {
       }}
     )
     .then((response) => {
-      console.log(response.data);
       setcurrentWatchlist(response.data);
     })
     .catch((err) => {
@@ -33,10 +31,20 @@ export default function Watchlist(props) {
   }
 
   function handleDeleteStock(symbol) {
-    //axios call to delete a stock from server
     axios
-      .get(`${serverURL}/watchlist/${symbol}`)
+      .put(`${serverURL}/watchlist/${symbol}`, {
+        headers: {
+          authorization: `Bearer ${clientAuthToken}`,
+        }}, {
+          symbol: symbol,
+        }
+      ).then((response) => {
+        console.log(response);
+      }).catch(err => {
+        console.log(err);
+      })
   }
+
   return (
     <div className="watchlist">
       <div className="watchlist-top">

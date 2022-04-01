@@ -25,7 +25,7 @@ export default class SignUpPage extends Component {
       password: password,
       confirm: confirmPass
     }).then(response => {
-      console.log("New User profile created");
+      // console.log("New User profile created");
       window.location = '/login'
     }).catch(err => console.log("sign up error", err))
   }

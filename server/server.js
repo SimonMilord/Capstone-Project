@@ -8,11 +8,11 @@ const { db } = require('./models/user');
 const app = express();
 const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 8080;
+app.use(cors());
 
 // put in env password
 mongoose.connect('mongodb+srv://stonkers_user:uFfdaWY5sYHXb3QR@stonkers.9ivjh.mongodb.net/myFirstDatabase').then();
 // middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 

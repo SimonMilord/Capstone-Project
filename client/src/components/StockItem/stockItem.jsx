@@ -21,7 +21,6 @@ export default class StockItem extends Component {
         this.setState({
           stockQuote: res.data,
         });
-        console.log("fetched quote");
       })
       .catch((err) => {
         console.error(err);
@@ -42,7 +41,7 @@ export default class StockItem extends Component {
   }
 
   deleteStock = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.props.deleteItem(e.target.value);
   }
 

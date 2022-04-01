@@ -9,9 +9,13 @@ import TimeSelector from "../../components/TimeSelector/timeSelector";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
+const serverURL = process.env.REACT_APP_SERVER_URL;
+let clientAuthToken = sessionStorage.getItem('clientAuthToken');
 const defaultStock = "AAPL";
 const defaultTime = (new Date().setFullYear(new Date().getFullYear() - 1)/1000).toFixed();
 const today = (Date.now()/1000).toFixed();
+
+// console.log(clientAuthToken);
 
 export default class MainPage extends Component {
   state = {
@@ -59,12 +63,19 @@ export default class MainPage extends Component {
   }
 
   handleAddStock = () => {
-    const stockObject = {
+    axios.put(`${serverURL}/watchlist`, {
       symbol: this.state.stock,
-      name: this.state.stockName,
-    }
-    // axios post call to post the stockObject to server
+      name: this.state.stockName
+    }, {
+      headers: {
+        authorization: `Bearer ${clientAuthToken}`,
+      }
+    }).then(response => {
 
+      console.log(response, "stock added to watchlist");
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   // ----- API CALLS -----

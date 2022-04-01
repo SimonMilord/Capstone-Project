@@ -2,26 +2,33 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const PORT = process.env.PORT;
-const User = require('./../models/user');
+const User = require("./../models/user");
 const jwt = require("jsonwebtoken");
 
 const authorize = (req, res, next) => {
-  if(req.path === '/user/login' || req.path === '/user/signup') {
+  if (req.path === "/user/login" || req.path === "/user/signup") {
     next();
   } else {
-    if(!req.headers.authorization) {
-      return res.status(401).json({message: 'Token not found'});
+    console.log(req.headers);
+    if (!req.headers.authorization) {
+      // console.log(req.headers);
+      return res.status(401).json({ message: "Token not found" }); //here
     }
-    const authTokenArray = req.headers.authorization.split(' ');
-    if (authTokenArray[0].toLowerCase() !== 'bearer' && authTokenArray.length !== 2) {
+    const authTokenArray = req.headers.authorization.split(" ");
+    if (
+      authTokenArray[0].toLowerCase() !== "bearer" &&
+      authTokenArray.length !== 2
+    ) {
       console.log(req.headers.authorization);
-      return res.status(401).json({message: 'Invalid token.'});
+      return res.status(401).json({ message: "Invalid token." });
     }
 
     jwt.verify(authTokenArray[1], process.env.JWT_SECRET, (err, decoded) => {
-      if(err) {
+      if (err) {
         console.log(err);
-        return res.status(401).json({message: 'This token is expired or invalid'});
+        return res
+          .status(401)
+          .json({ message: "This token is expired or invalid" });
       } else {
         req.tokenData = decoded;
         console.log(req.tokenData);
@@ -29,79 +36,104 @@ const authorize = (req, res, next) => {
       }
     });
   }
-}
-
-
+};
 
 // ------ USER ROUTES -----
 // GET a user by ID
 router.get("/", authorize, (req, res) => {
-    res.json(req.tokenData);
-})
+  res.json(req.tokenData);
+});
 
 // POST a new user signing up
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   if (req.password !== req.confirm) {
-    return res.status(401).json({message: "Passwords do not match"});
+    return res.status(401).json({ message: "Passwords do not match" });
   } else {
     let user = new User({
       username: req.body.username,
       password: req.body.password,
-      watchlist: [{
-        symbol: null,
-        name: null,
-      }]
-    })
+      watchlist: [
+        {
+          symbol: null,
+          name: null,
+        },
+      ],
+    });
     try {
       // if successful, save user to DB and send the get user by ID route
-     user = await user.save();
-     res.send("logged in");
+      user = await user.save();
+      res.send("logged in");
     } catch (err) {
       console.error(err);
     }
   }
-})
-
+});
 
 // POST Login request
-router.post('/login',async(req, res, next) => {
-  const foundUser = await User.findOne({username: req.body.username}).exec();
+router.post("/login", async (req, res, next) => {
+  const foundUser = await User.findOne({ username: req.body.username }).exec();
   if (!foundUser) {
-    return res.status(403).json({message: "No such user."});
+    return res.status(403).json({ message: "No such user." });
   }
 
   if (foundUser.password === req.body.password) {
-    const token = jwt.sign({
-      username: foundUser.username,
-     }, `${process.env.JWT_SECRET}`, {expiresIn: '30d'});
-     return res.json({token: token, userData: req.tokenData});
+    const token = jwt.sign(
+      {
+        username: foundUser.username,
+      },
+      `${process.env.JWT_SECRET}`,
+      { expiresIn: "30d" }
+    );
+    return res.json({ token: token, userData: req.tokenData });
   } else {
-    return res.status(403).json({message: 'Invalid username or password.'});
+    return res.status(403).json({ message: "Invalid username or password." });
   }
 });
 
-// ----- WATCHLIST ROUTES ----- authorize
+// ----- WATCHLIST ROUTES -----
 
 // GET user watchlist
-router.get('/watchlist', authorize, async (req, res) => {
-  console.log(req.body);
-  const userObject = await User.findOne({username: req.tokenData.username});
-  console.log(userObject);
-  res.json(
-    userObject.watchlist
-  );
-})
-
-// POST add to watchlist
-router.post('/watchlist', authorize, (req, res) => {
-  res.json({
-    // send watchlist from DB
-  });
+router.get("/watchlist", authorize, async (req, res) => {
+  const userObject = await User.findOne({ username: req.tokenData.username });
+  res.status(200).json(userObject.watchlist);
 });
+
+// PUT add to watchlist
+router.put("/watchlist", authorize, async (req, res) => {
+  const updatedWatchlist = await User.updateOne(
+    { username: req.tokenData.username },
+    {
+      $push: {
+        watchlist: [
+          {
+            symbol: req.body.symbol,
+            name: req.body.name,
+          },
+        ],
+      },
+    }
+    );
+    const userObject = await User.findOne({ username: req.tokenData.username });
+    res.status(200).json(userObject.watchlist);
+  });
 
 // DELETE stock from watchlist
-router.delete('/watchlist/:symbol', authorize, (req, res) => {
-
-});
+router.put("/watchlist/:symbol", authorize, async (req, res) => {
+  const updatedWatchlist = await User.updateOne(
+    { username: req.tokenData.username },
+    {
+      $pull: {
+        watchlist: [
+          {
+            symbol: req.params.symbol,
+            name: req.params.name,
+          },
+        ],
+      },
+    }
+  );
+  const userObject = await User.findOne({ username: req.tokenData.username });
+  res.status(200).json(userObject.watchlist);
+  });
 
 module.exports = router;
