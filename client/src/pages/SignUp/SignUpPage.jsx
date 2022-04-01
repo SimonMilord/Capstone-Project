@@ -55,7 +55,7 @@ export default class SignUpPage extends Component {
             placeholder='Confirm password'>
             </input>
             <button className='signup__btn signup__btn--login' type="submit" >Sign up</button>
-            <Link to="/login">Login</Link>
+            <Link className="signup__link" to="/login">Login</Link>
           </form>
         </div>
       </div>

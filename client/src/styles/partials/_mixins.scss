@@ -14,8 +14,6 @@
 }
 
 
-
-
 // Other mixins:
 
 @mixin display-flex($direction, $justify, $align) {
@@ -48,7 +46,6 @@
 
 @mixin backgroundGradient {
   background: linear-gradient(38deg, #ee7752, #e96195, #23a6d5, #23d5ab, #4379FF);
-  // background: linear-gradient(45deg, #23d5ab, #23a6d5, #4379FF, #5433FF);
   background-size: 400% 400%;
   animation: gradient 12s ease infinite;
   height: 100vh;
@@ -56,13 +53,13 @@
 }
 
 @mixin authCard {
-  padding: 60px 70px 50px 70px;
+  padding: 3rem 4rem 3rem 4rem;
   background-color: $global-white;
   border-radius: 10px;
-  width: 30%;
+  width: 90%;
   min-width: 300px;
   max-width: 500px;
-  height: 40vh;
+  height: 50vh;
   min-height: 300px;
   max-height: 500px;
   border: transparent;
@@ -70,5 +67,44 @@
 }
 
 @mixin btn {
+  background-color: $main-color;
+  color: $global-white;
+  border: transparent;
+  border-radius: 10px;
+  font-size: $main-font-size;
+  padding: 0.5rem 2rem;
+  width: 50%;
+  cursor: pointer;
 
+  &:hover {
+    transition: 0.5s;
+    background-color: $btn-hover-color;
+  }
+}
+
+@mixin input {
+  border-radius: 10px;
+  border: 1px solid rgb(180, 180, 180);
+  padding: 0.5rem;
+  font-size: $main-font-size;
+  color: $input-text-color;
+
+  &:hover {
+    border-color: $main-color;
+  }
+  &:focus {
+    outline-color: $main-color;
+  }
+}
+
+@mixin link {
+  color:#4379FF;
+  text-decoration: none;
+  font-size: $main-font-size;
+
+  &:hover {
+    transition: 0.5s;
+    color: $btn-hover-color;
+    text-decoration: underline;
+  }
 }

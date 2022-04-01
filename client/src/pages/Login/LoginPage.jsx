@@ -37,7 +37,6 @@ export default class LoginPage extends Component {
       }
     }).then(response => {
       sessionStorage.setItem('username', response.data.username);
-      // console.log(response.data);
       this.setState({
         profile: response.data
       });
@@ -67,7 +66,7 @@ export default class LoginPage extends Component {
               placeholder='Password'>
               </input>
               <button className='login__btn login__btn--login' type="submit" >Login</button>
-              <Link to="/signup">Sign up</Link>
+              <Link className="login__link" to="/signup">Sign up</Link>
             </form>
           </div>
         </div>
