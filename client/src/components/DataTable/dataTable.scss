@@ -19,8 +19,14 @@
   }
   &__value {
 
-    &--rec {
-
+    &--buy {
+      color: $rec-color-buy;
+    }
+    &--hold {
+      color: $rec-color-hold;
+    }
+    &--sell {
+      color: $rec-color-sell;
     }
   }
 }

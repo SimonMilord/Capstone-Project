@@ -44,7 +44,9 @@ export default function DataTable(props) {
       </div>
       <div className='data__item'>
         <p className='data__name'>Recommendation</p>
-        <div className='data__value data__value--rec'>{props.recommendation}</div>
+        <div className={props.recommendation === "BUY" ? "data__value--buy"
+         : props.recommendation === "HOLD" ? "data__value--hold"
+         : "data__value--sell"}>{props.recommendation}</div>
       </div>
     </div>
   );
