@@ -18,7 +18,6 @@ export default function Quote(props) {
   }
   // handler function to add stock to watchlist
   const addStock = () => {
-    // console.log("added to watchlist");
     props.addBtn();
   }
 

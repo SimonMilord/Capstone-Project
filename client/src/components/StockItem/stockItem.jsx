@@ -40,6 +40,12 @@ export default class StockItem extends Component {
         });
       });
   }
+
+  deleteStock = (e) => {
+    console.log(e.target.value);
+    this.props.deleteItem(e.target.value);
+  }
+
   render() {
     const data = this.state.stockQuote;
     return (
@@ -66,7 +72,7 @@ export default class StockItem extends Component {
             </div>
           </div>
         </div>
-        <button className="stock__delBtn" type="submit">
+        <button className="stock__delBtn" type="submit" value={this.props.symbol} onClick={this.deleteStock}>
           X
         </button>
       </div>

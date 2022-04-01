@@ -29,7 +29,6 @@ export default class MainPage extends Component {
 
   // Life cycle methods
   componentDidMount() {
-    // console.log("component mounted");
     this.getStockQuote(defaultStock);
     this.getStockName(defaultStock);
     this.getStockFinancials(defaultStock);
@@ -64,8 +63,8 @@ export default class MainPage extends Component {
       symbol: this.state.stock,
       name: this.state.stockName,
     }
-    // PUSH the stockObject to DB!
-    console.log(stockObject);
+    // axios post call to post the stockObject to server
+
   }
 
   // ----- API CALLS -----
@@ -186,15 +185,12 @@ export default class MainPage extends Component {
 
     // API call to get the 5 years stock price data for the chart
     getStockPriceData(symbol, from) {
-      // console.log(today);
-      // console.log(from);
       axios
         .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${today}&token=${KEY}`)
         .then((res) => {
           this.setState(() => ({
             stockChartData: res.data,
           }));
-          // console.log(res);
         })
         .catch((err) => {
           console.error(err);

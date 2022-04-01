@@ -5,20 +5,45 @@ const PORT = process.env.PORT;
 const User = require('./../models/user');
 const jwt = require("jsonwebtoken");
 
+const authorize = (req, res, next) => {
+  if(req.path === '/user/login' || req.path === '/user/signup') {
+    next();
+  } else {
+    if(!req.headers.authorization) {
+      return res.status(401).json({message: 'Token not found'});
+    }
+    const authTokenArray = req.headers.authorization.split(' ');
+    if (authTokenArray[0].toLowerCase() !== 'bearer' && authTokenArray.length !== 2) {
+      console.log(req.headers.authorization);
+      return res.status(401).json({message: 'Invalid token.'});
+    }
+
+    jwt.verify(authTokenArray[1], process.env.JWT_SECRET, (err, decoded) => {
+      if(err) {
+        console.log(err);
+        return res.status(401).json({message: 'This token is expired or invalid'});
+      } else {
+        req.tokenData = decoded;
+        console.log(req.tokenData);
+        next();
+      }
+    });
+  }
+}
+
+
+
 // ------ USER ROUTES -----
 // GET a user by ID
-router.get("/", (req, res) => {
-  // const targetUser = User.findOne({id: req.params.id}); // not sure
-    res.json(req.jwtPayload);
+router.get("/", authorize, (req, res) => {
+    res.json(req.tokenData);
 })
 
 // POST a new user signing up
 router.post('/signup', async (req, res) => {
   if (req.password !== req.confirm) {
-    // console.log("user not created");
     return res.status(401).json({message: "Passwords do not match"});
   } else {
-    // console.log("new user created");
     let user = new User({
       username: req.body.username,
       password: req.body.password,
@@ -49,23 +74,33 @@ router.post('/login',async(req, res, next) => {
     const token = jwt.sign({
       username: foundUser.username,
      }, `${process.env.JWT_SECRET}`, {expiresIn: '30d'});
-     return res.json({token: token, userData: req.jwtPayload});
+     return res.json({token: token, userData: req.tokenData});
   } else {
     return res.status(403).json({message: 'Invalid username or password.'});
   }
 });
 
-// ----- WATCHLIST ROUTES -----
+// ----- WATCHLIST ROUTES ----- authorize
+
+// GET user watchlist
+router.get('/watchlist', authorize, async (req, res) => {
+  console.log(req.body);
+  const userObject = await User.findOne({username: req.tokenData.username});
+  console.log(userObject);
+  res.json(
+    userObject.watchlist
+  );
+})
 
 // POST add to watchlist
-router.post('/watchlist', (req, res) => {
+router.post('/watchlist', authorize, (req, res) => {
   res.json({
     // send watchlist from DB
   });
 });
 
 // DELETE stock from watchlist
-router.delete('/watchlist/:symbol', (req, res) => {
+router.delete('/watchlist/:symbol', authorize, (req, res) => {
 
 });
 
