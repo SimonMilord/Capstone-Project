@@ -31,3 +31,44 @@
     padding: 2rem;
   }
 }
+
+@mixin backgroundAnimation {
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+@mixin backgroundGradient {
+  background: linear-gradient(38deg, #ee7752, #e96195, #23a6d5, #23d5ab, #4379FF);
+  // background: linear-gradient(45deg, #23d5ab, #23a6d5, #4379FF, #5433FF);
+  background-size: 400% 400%;
+  animation: gradient 12s ease infinite;
+  height: 100vh;
+  @include backgroundAnimation;
+}
+
+@mixin authCard {
+  padding: 60px 70px 50px 70px;
+  background-color: $global-white;
+  border-radius: 10px;
+  width: 30%;
+  min-width: 300px;
+  max-width: 500px;
+  height: 40vh;
+  min-height: 300px;
+  max-height: 500px;
+  border: transparent;
+  box-shadow: rgb(59 59 59 / 5%) 0px 5px 15px 0px;
+}
+
+@mixin btn {
+
+}

@@ -9,7 +9,7 @@
   width: 100%;
   bottom: 0;
   @include display-flex(row,space-between,center);
-  border-top: 1px solid black;
+  // border-top: 1px solid black;
   @include paddingSection;
   @include tablet {
     @include display-flex(row,flex-end,center);
