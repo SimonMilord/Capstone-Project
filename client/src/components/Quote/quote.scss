@@ -21,6 +21,9 @@
   &__name {
     font-size: 18px;
   }
+  &__btn {
+    // @include btn;
+  }
   &__bottom {
     @include display-flex(row,flex-start,center);
     width:100%;

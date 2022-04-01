@@ -105,6 +105,22 @@
   &:hover {
     transition: 0.5s;
     color: $btn-hover-color;
-    text-decoration: underline;
+    color: $btn-hover-color;
+    font-weight: 900;
+  }
+}
+@mixin link-home {
+  color:#4379FF;
+  text-decoration: none;
+  font-size: $main-font-size;
+
+  &:hover {
+    transition: 0.5s;
+    // color: $btn-hover-color;
+    color: $global-white;
+    font-weight: 900;
+    background-color: $main-color;
+    padding: 0.5rem;
+    border-radius: 10px;
   }
 }
