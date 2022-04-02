@@ -113,14 +113,14 @@ router.put("/watchlist", authorize, async (req, res) => {
 
 // DELETE stock from watchlist
 router.put("/watchlist/:symbol", authorize, async (req, res) => {
-  const updatedWatchlist = await User.updateMany(
+  const updatedWatchlist = await User.updateOne(
     { username: req.tokenData.username },
     {
       $pull: {
         watchlist: {
           symbol: req.body.symbol,
           name: req.body.name
-        }
+        },
       }
     },
   );

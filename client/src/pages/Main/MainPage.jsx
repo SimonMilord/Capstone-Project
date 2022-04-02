@@ -72,7 +72,7 @@ export default class MainPage extends Component {
         authorization: `Bearer ${clientAuthToken}`,
       }
     }).then(response => {
-      console.log(response, "stock added to watchlist");
+      alert(`${this.state.stockName} added to watchlist`); // change to set added class to button
     }).catch((err) => {
       console.log(err);
     });

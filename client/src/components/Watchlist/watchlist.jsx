@@ -30,7 +30,6 @@ export default function Watchlist(props) {
   }
 
   function handleDeleteStock(stockQuote) {
-    // console.log(stockQuote.name); AAPL and APPLE INC.
     axios.put(`${serverURL}/watchlist/${stockQuote.symbol}`,
         {
           symbol: stockQuote.symbol,
@@ -42,10 +41,9 @@ export default function Watchlist(props) {
         }
       )
       .then((response) => {
-        console.log(response, "stock deleted from watchlist");
+        setcurrentWatchlist(response.data);
       })
       .catch((err) => {
-        console.log("error is here");
         console.log(err);
       });
   }
@@ -61,17 +59,21 @@ export default function Watchlist(props) {
         </Link>
       </div>
       <div className="labels">
-        <div className="labels__item">
-          <h2>Symbol</h2>
+        <div className="labels__left">
+          <div className="labels__item labels__item--ticker">
+            <h2>Symbol</h2>
+          </div>
+          <div className="labels__item labels__item--name">
+            <h2>Name</h2>
+          </div>
         </div>
-        <div className="labels__item">
-          <h2>Name</h2>
-        </div>
-        <div className="labels__item">
-          <h2>Price</h2>
-        </div>
-        <div className="labels__item">
-          <h2>Change (%)</h2>
+        <div className="labels__right">
+          <div className="labels__item labels__item--price">
+            <h2>Price</h2>
+          </div>
+          <div className="labels__item labels__item--change">
+            <h2>Change (%)</h2>
+          </div>
         </div>
       </div>
       <ul className="watchlist__list">

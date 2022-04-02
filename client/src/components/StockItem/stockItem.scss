@@ -19,11 +19,20 @@
 
   &__right {
     @include display-flex(row, flex-end, center);
-    width: 50%;
+    width: 40%;
   }
 
   &__data {
     width: 50%;
+    padding-right: 1rem;
+
+    &--ticker {
+      width: 40%;
+    }
+
+    &--name {
+      width: 60%;
+    }
 
     &--up {
       color: $rec-color-buy;

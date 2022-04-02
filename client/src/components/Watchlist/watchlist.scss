@@ -8,15 +8,35 @@
     @include display-flex(row,space-between,center);
     margin-bottom: 2rem;
   }
+  &__title {
+    font-size: $logo-font-size;
+  }
 
   .labels {
-    // @include display-flex(row,space-between,center);
+    @include display-flex(row,space-between,center);
     display: flex;
-    justify-content: space-between;
     width: 90%;
     margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: $labels-font-size;
+
+    &__left {
+      width: 50%;
+      @include display-flex(row,space-between,center);
+    }
     &__item {
-      width: 25%;
+      width: 50%;
+
+      &--ticker {
+        width: 40%;
+      }
+      &--name {
+        width: 60%;
+      }
+    }
+    &__right {
+      width: 40%;
+      @include display-flex(row,space-between,center);
     }
   }
 }
