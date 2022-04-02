@@ -9,9 +9,8 @@ const authorize = (req, res, next) => {
   if (req.path === "/user/login" || req.path === "/user/signup") {
     next();
   } else {
-    console.log(req.headers);
+    // console.log(req.headers);
     if (!req.headers.authorization) {
-      // console.log(req.headers);
       return res.status(401).json({ message: "Token not found" }); //here
     }
     const authTokenArray = req.headers.authorization.split(" ");
@@ -19,7 +18,7 @@ const authorize = (req, res, next) => {
       authTokenArray[0].toLowerCase() !== "bearer" &&
       authTokenArray.length !== 2
     ) {
-      console.log(req.headers.authorization);
+      // console.log(req.headers.authorization);
       return res.status(401).json({ message: "Invalid token." });
     }
 
@@ -31,7 +30,7 @@ const authorize = (req, res, next) => {
           .json({ message: "This token is expired or invalid" });
       } else {
         req.tokenData = decoded;
-        console.log(req.tokenData);
+        // console.log(req.tokenData);
         next();
       }
     });
@@ -52,12 +51,7 @@ router.post("/signup", async (req, res) => {
     let user = new User({
       username: req.body.username,
       password: req.body.password,
-      watchlist: [
-        {
-          symbol: null,
-          name: null,
-        },
-      ],
+      watchlist: [],
     });
     try {
       // if successful, save user to DB and send the get user by ID route
@@ -100,10 +94,10 @@ router.get("/watchlist", authorize, async (req, res) => {
 
 // PUT add to watchlist
 router.put("/watchlist", authorize, async (req, res) => {
-  const updatedWatchlist = await User.updateOne(
+  const updatedWatchlist = await User.findOneAndUpdate(
     { username: req.tokenData.username },
     {
-      $push: {
+      $addToSet: {
         watchlist: [
           {
             symbol: req.body.symbol,
@@ -119,18 +113,16 @@ router.put("/watchlist", authorize, async (req, res) => {
 
 // DELETE stock from watchlist
 router.put("/watchlist/:symbol", authorize, async (req, res) => {
-  const updatedWatchlist = await User.updateOne(
+  const updatedWatchlist = await User.updateMany(
     { username: req.tokenData.username },
     {
       $pull: {
-        watchlist: [
-          {
-            symbol: req.params.symbol,
-            name: req.params.name,
-          },
-        ],
-      },
-    }
+        watchlist: {
+          symbol: req.body.symbol,
+          name: req.body.name
+        }
+      }
+    },
   );
   const userObject = await User.findOne({ username: req.tokenData.username });
   res.status(200).json(userObject.watchlist);

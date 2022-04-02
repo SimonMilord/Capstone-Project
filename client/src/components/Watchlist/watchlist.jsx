@@ -1,48 +1,53 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./watchlist.scss";
 import StockItem from "../StockItem/stockItem";
 import axios from "axios";
 
-let clientAuthToken = sessionStorage.getItem('clientAuthToken');
+let clientAuthToken = sessionStorage.getItem("clientAuthToken");
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
 export default function Watchlist(props) {
-
   const [currentWatchlist, setcurrentWatchlist] = useState([]);
 
   useEffect(() => {
     getWatchlist();
-  }, [])
+  }, []);
 
   function getWatchlist() {
     axios
-    .get(`${serverURL}/watchlist`, {
-      headers: {
-        authorization: `Bearer ${clientAuthToken}`
-      }}
-    )
-    .then((response) => {
-      setcurrentWatchlist(response.data);
-    })
-    .catch((err) => {
+      .get(`${serverURL}/watchlist`, {
+        headers: {
+          authorization: `Bearer ${clientAuthToken}`,
+        },
+      })
+      .then((response) => {
+        setcurrentWatchlist(response.data);
+      })
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  function handleDeleteStock(symbol) {
-    axios
-      .put(`${serverURL}/watchlist/${symbol}`, {
-        headers: {
-          authorization: `Bearer ${clientAuthToken}`,
-        }}, {
-          symbol: symbol,
+  function handleDeleteStock(stockQuote) {
+    // console.log(stockQuote.name); AAPL and APPLE INC.
+    axios.put(`${serverURL}/watchlist/${stockQuote.symbol}`,
+        {
+          symbol: stockQuote.symbol,
+          name: stockQuote.name
+        }, {
+          headers: {
+            authorization: `Bearer ${clientAuthToken}`,
+          }
         }
-      ).then((response) => {
-        console.log(response);
-      }).catch(err => {
-        console.log(err);
+      )
+      .then((response) => {
+        console.log(response, "stock deleted from watchlist");
       })
+      .catch((err) => {
+        console.log("error is here");
+        console.log(err);
+      });
   }
 
   return (

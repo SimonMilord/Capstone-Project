@@ -8,6 +8,10 @@ const KEY = process.env.REACT_APP_API_KEY;
 export default class StockItem extends Component {
   state = {
     stockQuote: {},
+    stockInfo: {
+      symbol: this.props.symbol,
+      name: this.props.name
+    }
   };
 
   componentDidMount() {
@@ -40,9 +44,9 @@ export default class StockItem extends Component {
       });
   }
 
-  deleteStock = (e) => {
+  deleteStock = () => {
     // console.log(e.target.value);
-    this.props.deleteItem(e.target.value);
+    this.props.deleteItem(this.state.stockInfo);
   }
 
   render() {
@@ -71,7 +75,7 @@ export default class StockItem extends Component {
             </div>
           </div>
         </div>
-        <button className="stock__delBtn" type="submit" value={this.props.symbol} onClick={this.deleteStock}>
+        <button className="stock__delBtn" type="submit" value={this.state.stockInfo} onClick={this.deleteStock}>
           X
         </button>
       </div>

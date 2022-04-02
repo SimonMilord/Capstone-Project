@@ -62,6 +62,7 @@ export default class MainPage extends Component {
     });
   }
 
+  // function to add stock to watchlist
   handleAddStock = () => {
     axios.put(`${serverURL}/watchlist`, {
       symbol: this.state.stock,
@@ -71,7 +72,6 @@ export default class MainPage extends Component {
         authorization: `Bearer ${clientAuthToken}`,
       }
     }).then(response => {
-
       console.log(response, "stock added to watchlist");
     }).catch((err) => {
       console.log(err);
@@ -79,7 +79,6 @@ export default class MainPage extends Component {
   }
 
   // ----- API CALLS -----
-
   // API call to get Name and symbol of the company
   getStockName(symbol) {
     axios
