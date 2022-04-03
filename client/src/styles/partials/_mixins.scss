@@ -59,7 +59,7 @@
 @mixin authCard {
   padding: 3rem 4rem 3rem 4rem;
   background-color: $global-white;
-  border-radius: 10px;
+  border-radius: $radius;
   width: 90%;
   min-width: 300px;
   max-width: 500px;
@@ -74,19 +74,25 @@
   background-color: $main-color;
   color: $global-white;
   border: transparent;
-  border-radius: 10px;
+  border-radius: $radius;
   font-size: $main-font-size;
   padding: 0.5rem 2rem;
   cursor: pointer;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  transition: 0.2s all;
 
   &:hover {
-    transition: 0.5s;
+    transition: 0.2s;
     background-color: $btn-hover-color;
+  }
+  &:active {
+    transform: scale(0.95);
+    box-shadow: none;
   }
 }
 
 @mixin input {
-  border-radius: 10px;
+  border-radius: $radius;
   border: 1px solid rgb(180, 180, 180);
   padding: 0.5rem;
   font-size: $main-font-size;
@@ -119,11 +125,10 @@
 
   &:hover {
     transition: 0.5s;
-    // color: $btn-hover-color;
     color: $global-white;
     font-weight: 900;
     background-color: $main-color;
     padding: 0.5rem;
-    border-radius: 10px;
+    border-radius: $radius;
   }
 }
