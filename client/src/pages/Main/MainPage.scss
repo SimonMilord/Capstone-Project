@@ -6,6 +6,10 @@
   @include paddingSection;
   @include wrapper;
 
+  @include desktop {
+    padding: 2rem 2rem;
+  }
+
   &-top {
     margin-bottom: 2rem;
   }

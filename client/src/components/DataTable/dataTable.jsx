@@ -69,7 +69,7 @@ export default function DataTable(props) {
               <InfoOutlinedIcon style={{ fontSize: ttsize }}/>
             </Tooltip>
           </div>
-          <div className='data__value'>{fin.metric && Number(fin.metric.peNormalizedAnnual).toFixed(2)}</div>
+          <div className='data__value'>{fin.metric > 0 ? Number(fin.metric.peNormalizedAnnual).toFixed(2) : "N/A"}</div>
         </div>
         <div className='data__item'>
           <p className='data__name'>Dividend & Yield</p>

@@ -26,6 +26,8 @@
   }
   &__name {
     font-size: 18px;
+    display: flex;
+    align-items: center;
   }
   &__btn {
     @include btn;
