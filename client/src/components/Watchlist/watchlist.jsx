@@ -81,7 +81,7 @@ export default function Watchlist(props) {
       <ul className="watchlist__list">
         {currentWatchlist &&
           currentWatchlist.map((stockItem) => (
-            <li className="watchlist__item" key={stockItem._id}>
+            <li className="watchlist__item" key={stockItem.symbol}>
               <StockItem
                 symbol={stockItem.symbol}
                 name={stockItem.name}

@@ -7,7 +7,7 @@
     @include display-flex(row,space-between,center);
     margin-bottom: 1.5rem;
     @include tablet {
-      border-bottom: 1px solid $input-text-color;
+      border-bottom: 1px solid $border-color;
       padding: 1rem 0rem;
     }
   }
@@ -34,6 +34,12 @@
     @include display-flex(row,center,center);
     .quote__textBtn {
       color: $global-white;
+    }
+    &--remove {
+      background-color: $btn-hover-color;
+      &:hover {
+        background-color: $main-color;
+      }
     }
   }
   &__bottom {

@@ -9,16 +9,14 @@ const authorize = (req, res, next) => {
   if (req.path === "/user/login" || req.path === "/user/signup") {
     next();
   } else {
-    // console.log(req.headers);
     if (!req.headers.authorization) {
-      return res.status(401).json({ message: "Token not found" }); //here
+      return res.status(401).json({ message: "Token not found" });
     }
     const authTokenArray = req.headers.authorization.split(" ");
     if (
       authTokenArray[0].toLowerCase() !== "bearer" &&
       authTokenArray.length !== 2
     ) {
-      // console.log(req.headers.authorization);
       return res.status(401).json({ message: "Invalid token." });
     }
 
@@ -30,7 +28,6 @@ const authorize = (req, res, next) => {
           .json({ message: "This token is expired or invalid" });
       } else {
         req.tokenData = decoded;
-        // console.log(req.tokenData);
         next();
       }
     });
@@ -38,6 +35,7 @@ const authorize = (req, res, next) => {
 };
 
 // ------ USER ROUTES -----
+
 // GET a user by ID
 router.get("/", authorize, (req, res) => {
   res.json(req.tokenData);

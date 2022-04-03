@@ -54,11 +54,11 @@ export default function DataTable(props) {
           <div className='data__value'>{Number(props.profile.marketCapitalization/1000).toFixed(3)}B</div>
         </div>
         <div className='data__item'>
-        <div className='data-tooltip-wrap'>
-          <p className='data__name'>Beta</p>&nbsp;
-          <Tooltip title="Measure of a stock's volatility in relation with the overall market" placement="top">
-            <InfoOutlinedIcon style={{ fontSize: ttsize }}/>
-          </Tooltip>
+          <div className='data-tooltip-wrap'>
+            <p className='data__name'>Beta</p>&nbsp;
+            <Tooltip title="Measure of a stock's volatility in relation with the overall market" placement="top">
+              <InfoOutlinedIcon style={{ fontSize: ttsize }}/>
+            </Tooltip>
           </div>
           <div className='data__value'>{fin.metric && Number(fin.metric.beta).toFixed(2)}</div>
         </div>
@@ -69,7 +69,7 @@ export default function DataTable(props) {
               <InfoOutlinedIcon style={{ fontSize: ttsize }}/>
             </Tooltip>
           </div>
-          <div className='data__value'>{fin.metric > 0 ? Number(fin.metric.peNormalizedAnnual).toFixed(2) : "N/A"}</div>
+          <div className='data__value'>{fin.metric && fin.metric.peBasicExclExtraTTM > 0 ? Number(fin.metric.peBasicExclExtraTTM).toFixed(2) : "N/A"}</div>
         </div>
         <div className='data__item'>
           <p className='data__name'>Dividend & Yield</p>

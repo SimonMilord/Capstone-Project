@@ -28,28 +28,33 @@ export default class MainPage extends Component {
     stockRecommendation: "",
     stockChartData: {},
     fromPeriod: defaultTime,
+    userWatchlist: [],
+    inWatchlist: false,
   };
 
   // Life cycle methods
   componentDidMount() {
-    this.getStockQuote(defaultStock);
-    this.getStockName(defaultStock);
-    this.getStockFinancials(defaultStock);
     this.getStockProfile(defaultStock);
-    this.getStockRatings(defaultStock);
+    this.getStockQuote(defaultStock);
     this.getStockPriceData(defaultStock, defaultTime); // Data required for the chart
+    this.getStockFinancials(defaultStock);
+    this.getStockRatings(defaultStock);
+    this.getWatchlist();
   }
 
   // ----- HANDLER FUNCTIONS -----
 
   // functions that call API request functions once a stock is searched
   handleQuoteData = (quote) => {
-    this.getStockName(quote);
-    this.getStockQuote(quote);
-    this.getStockFinancials(quote);
+    this.setState({
+      stock: quote,
+    });
     this.getStockProfile(quote);
-    this.getStockRatings(quote);
+    this.getStockQuote(quote);
     this.getStockPriceData(quote, this.state.fromPeriod); // Data required for the chart
+    this.getStockFinancials(quote);
+    this.getStockRatings(quote);
+    this.getWatchlist();
   };
 
   //functions that handles time period for graph
@@ -64,35 +69,97 @@ export default class MainPage extends Component {
   // function to add stock to watchlist
   handleAddStock = () => {
     axios.put(`${serverURL}/watchlist`, {
-      symbol: this.state.stock,
-      name: this.state.stockName
+      symbol: this.state.stockProfile.ticker,
+      name: this.state.stockProfile.name
     }, {
       headers: {
         authorization: `Bearer ${clientAuthToken}`,
       }
     }).then(response => {
-      alert(`${this.state.stockName} added to watchlist`); // change to set added class to button
+      if (response.data.filter(e => e.symbol === this.state.stockProfile.ticker).length > 0) {
+        this.setState({
+          inWatchlist: true,
+        });
+      } else {
+        this.setState({
+          inWatchlist: false,
+        });
+      }
     }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  handleRemoveStock = (symbol) => {
+    axios.put(`${serverURL}/watchlist/${symbol}`,
+      {
+        symbol: this.state.stockProfile.ticker,
+        name: this.state.stockProfile.name
+      }, {
+        headers: {
+          authorization: `Bearer ${clientAuthToken}`,
+        }
+      }
+    )
+    .then((response) => {
+      if (response.data.filter(e => e.symbol === this.state.stockProfile.ticker).length > 0) {
+        this.setState({
+          inWatchlist: true,
+        });
+      } else {
+        this.setState({
+          inWatchlist: false,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  getWatchlist = () => {
+    axios
+    .get(`${serverURL}/watchlist`, {
+      headers: {
+        authorization: `Bearer ${clientAuthToken}`,
+      },
+    })
+    .then((response) => {
+      if (response.data.filter(e => e.symbol === this.state.stock).length > 0) {
+        this.setState({
+          inWatchlist: true,
+        });
+      } else {
+        this.setState({
+          inWatchlist: false,
+        });
+      }
+      this.setState({
+        userWatchlist: response.data
+      });
+      this.getStockProfile(this.state.stock);
+    })
+    .catch((err) => {
       console.log(err);
     });
   }
 
   // ----- API CALLS -----
   // API call to get Name and symbol of the company - SYMBOL LOOKUP
-  getStockName(symbol) {
-    axios
-      .get(`${URL}/search?q=${symbol}&token=${KEY}`)
-      .then((res) => {
-        this.setState({
-          stockName: res.data.result[0].description,
-          stock: res.data.result[0].symbol,
-        });
-        // console.log('fetched name');
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+  // getStockName(symbol) {
+  //   axios
+  //     .get(`${URL}/search?q=${symbol}&token=${KEY}`)
+  //     .then((res) => {
+  //       this.setState({
+  //         stockName: res.data.result[0].description,
+  //         stock: res.data.result[0].symbol,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }
+
   // API call to get current price, percent change and $ change - QUOTE
   getStockQuote(symbol) {
     axios
@@ -101,10 +168,8 @@ export default class MainPage extends Component {
         this.setState({
           stockQuote: res.data,
         });
-        // console.log('fetched quote');
       })
       .catch((err) => {
-        // console.error(err);
         alert(
           "Hi!, Please note the current version only supports US stocks for now."
         );
@@ -129,7 +194,6 @@ export default class MainPage extends Component {
         this.setState({
           stockFinancials: res.data,
         });
-        // console.log('fetched financials');
       })
       .catch((err) => {
         console.error(err);
@@ -142,9 +206,10 @@ export default class MainPage extends Component {
       .get(`${URL}/stock/profile2?symbol=${symbol}&token=${KEY}`)
       .then((res) => {
         this.setState({
+          stock: res.data.ticker,
+          stockName: res.data.name,
           stockProfile: res.data,
         });
-        // console.log('fetched profile');
       })
       .catch((err) => {
         console.error(err);
@@ -159,7 +224,6 @@ export default class MainPage extends Component {
         this.setState({
           stockRatings: res.data[0],
         });
-        // console.log('fetched recommendations');
         // cleaning up the array of analyst ratings and
         // aggregating values for readability
         let arr = Object.values(this.state.stockRatings);
@@ -185,7 +249,6 @@ export default class MainPage extends Component {
         }
       })
       .catch((err) => {
-        // console.error(err);
         this.setState({
           stockRecommendation: "N/A",
         });
@@ -216,11 +279,11 @@ export default class MainPage extends Component {
         <div className="mainPage">
           <div className="mainPage-top">
             <Quote
-              symbol={this.state.stock}
               quote={this.state.stockQuote}
-              name={this.state.stockName}
               profile={this.state.stockProfile}
               addBtn = {this.handleAddStock}
+              deleteBtn = {this.handleRemoveStock}
+              inWatchlistStatus = {this.state.inWatchlist}
             />
           </div>
           <div className="mainPage-bottom">

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./stockItem.scss";
 import axios from "axios";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 const URL = process.env.REACT_APP_API_URL;
@@ -47,7 +46,6 @@ export default class StockItem extends Component {
   }
 
   deleteStock = () => {
-    // console.log(e.target.value);
     this.props.deleteItem(this.state.stockInfo);
   }
 
