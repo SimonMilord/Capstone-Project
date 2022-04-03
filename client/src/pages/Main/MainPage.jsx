@@ -80,7 +80,7 @@ export default class MainPage extends Component {
   }
 
   // ----- API CALLS -----
-  // API call to get Name and symbol of the company
+  // API call to get Name and symbol of the company - SYMBOL LOOKUP
   getStockName(symbol) {
     axios
       .get(`${URL}/search?q=${symbol}&token=${KEY}`)
@@ -95,7 +95,7 @@ export default class MainPage extends Component {
         console.error(err);
       });
   }
-  // API call to get current price, percent change and $ change
+  // API call to get current price, percent change and $ change - QUOTE
   getStockQuote(symbol) {
     axios
       .get(`${URL}/quote?symbol=${symbol}&token=${KEY}`)
@@ -123,7 +123,7 @@ export default class MainPage extends Component {
       });
   }
 
-  // API call to get financials data
+  // API call to get financials data - BASIC FINANCIALS
   getStockFinancials(symbol) {
     axios
       .get(`${URL}/stock/metric?symbol=${symbol}&metric=all&token=${KEY}`)
@@ -138,7 +138,7 @@ export default class MainPage extends Component {
       });
   }
 
-  // API call to get company profile data
+  // API call to get company profile data - COMPANY PROFILE 2
   getStockProfile(symbol) {
     axios
       .get(`${URL}/stock/profile2?symbol=${symbol}&token=${KEY}`)
@@ -153,7 +153,7 @@ export default class MainPage extends Component {
       });
   }
 
-  // API call to get stock analysts ratings data and sets a recommendation value
+  // API call to get stock analysts ratings data and sets a recommendation value - RECOMMENDATION TRENDS
   getStockRatings(symbol) {
     axios
       .get(`${URL}/stock/recommendation?symbol=${symbol}&token=${KEY}`)
@@ -194,7 +194,7 @@ export default class MainPage extends Component {
       });
   }
 
-    // API call to get the 5 years stock price data for the chart
+    // API call to get the 5 years stock price data for the chart - CANDLES
     getStockPriceData(symbol, from) {
       axios
         .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${today}&token=${KEY}`)

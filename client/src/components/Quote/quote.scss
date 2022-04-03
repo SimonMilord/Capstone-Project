@@ -14,6 +14,11 @@
   &__ticker {
     margin-bottom: 0.5rem;
     font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+      flex-direction: row;
+    }
   }
   &__exchange {
     font-size: 16px;

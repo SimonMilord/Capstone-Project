@@ -35,7 +35,12 @@ export default function Quote(props) {
       <div className="quote__top">
         <div className="quote__company">
           <div className="quote__ticker">
-            {props.symbol} -{" "} {formatName(props.name)}
+            <div className="quote__symbol">
+            {props.symbol}&nbsp;-&nbsp;
+            </div>
+            <div className="quote__name">
+             {formatName(props.name)}
+            </div>
           </div>
             <div className="quote__exchange">{findExchange(props.profile.exchange)}</div>
         </div>

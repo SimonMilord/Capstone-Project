@@ -6,13 +6,11 @@
     @content;
   }
 }
-
 @mixin desktop {
   @media (min-width: 1280px) {
     @content;
   }
 }
-
 @mixin wrapper {
   max-width: $wrapper-width;
   margin: 0 auto;
@@ -75,11 +73,15 @@
   color: $global-white;
   border: transparent;
   border-radius: $radius;
-  font-size: $main-font-size;
-  padding: 0.5rem 2rem;
+  font-size: $secondary-font-size;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
   transition: 0.2s all;
+  @include tablet {
+    padding: 0.5rem 2rem;
+    font-size: $main-font-size;
+  }
 
   &:hover {
     transition: 0.2s;

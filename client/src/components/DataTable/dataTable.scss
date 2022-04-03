@@ -4,12 +4,24 @@
 
 .data {
   margin-top: 2rem;
-
   @include tablet {
+    max-width: $wrapper-width;
     border: 1px solid $input-text-color;
     border-radius: $radius;
     padding: 2rem;
-    margin: 2rem 0rem;
+    // margin: 2rem auto;
+    @include display-flex(row,space-evenly,flex-start);
+
+    &-left {
+      @include tablet {
+        width: 40%;
+      }
+    }
+    &-right {
+      @include tablet {
+        width: 40%;
+      }
+    }
   }
   &__item {
     @include display-flex(row,space-between,center);
@@ -21,7 +33,7 @@
     }
   }
   &__name {
-
+    // insert tooltips here
   }
   &__value {
 
