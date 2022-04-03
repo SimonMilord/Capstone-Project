@@ -4,8 +4,13 @@
 
 .stock {
   @include display-flex(row, space-between, center);
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $light-border-color;
   padding: 1rem 0rem;
+
+  &:hover {
+    background-color: rgba(211, 211, 211, 0.15);
+  }
+
   &-box {
     @include display-flex(row, space-between, center);
     width: 90%;
@@ -46,7 +51,7 @@
     }
   }
   &__delBtn {
-    background-color: transparent; // not sure
+    background-color: transparent;
     border: none;
     cursor: pointer;
 
