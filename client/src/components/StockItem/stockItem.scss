@@ -11,7 +11,7 @@
     width: 90%;
   }
   &__left {
-    width: 50%;
+    width: 57%;
     @include display-flex(row, space-between, center);
     @include tablet {
     }
@@ -19,12 +19,16 @@
 
   &__right {
     @include display-flex(row, flex-end, center);
-    width: 40%;
+    width: 43%;
   }
 
   &__data {
     width: 50%;
     padding-right: 1rem;
+    font-size: $secondary-font-size;
+    @include tablet {
+      font-size: $main-font-size;
+    }
 
     &--ticker {
       width: 40%;

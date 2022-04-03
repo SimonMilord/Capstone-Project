@@ -21,11 +21,12 @@
     font-size: $labels-font-size;
 
     &__left {
-      width: 50%;
+      width: 57%;
       @include display-flex(row,space-between,center);
     }
     &__item {
       width: 50%;
+      font-size: $main-font-size;
 
       &--ticker {
         width: 40%;
@@ -35,7 +36,7 @@
       }
     }
     &__right {
-      width: 40%;
+      width: 43%;
       @include display-flex(row,space-between,center);
     }
   }

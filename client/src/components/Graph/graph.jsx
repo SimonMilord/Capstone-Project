@@ -32,6 +32,8 @@ export default function Graph(props) {
         }
       }
     },
+    responsive: true,
+    maintainAspectRatio: true,
   }
 
 const data = {

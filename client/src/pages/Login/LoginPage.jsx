@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './LoginPage.scss';
 import Logo from '../../assets/Logo/stonkers-logo.svg';
+import Footer from '../../components/Footer/footer';
 
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
@@ -68,6 +69,7 @@ export default class LoginPage extends Component {
               <Link className="login__link" to="/signup">Sign up</Link>
             </form>
           </div>
+          <Footer />
         </div>
       }
       </>

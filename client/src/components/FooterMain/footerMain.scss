@@ -3,8 +3,8 @@
 @import "../../styles/partials/variables";
 
 
-.footer {
-  position: absolute;
+.footerMain {
+  position: relative; // footerMain change
   bottom: 0;
   padding: 1rem;
   height: 3.75rem;
