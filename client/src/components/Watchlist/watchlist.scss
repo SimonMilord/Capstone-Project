@@ -8,6 +8,18 @@
     @include display-flex(row,space-between,center);
     margin-bottom: 2rem;
   }
+  &__link {
+    text-decoration: none;
+  }
+
+  &__btn {
+    @include btn;
+    @include display-flex(row,center,center);
+  }
+
+  &__textBtn {
+    color: $global-white;
+  }
   &__title {
     font-size: $logo-font-size;
   }

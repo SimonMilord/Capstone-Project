@@ -55,15 +55,15 @@ export default function NavBar(props) {
               type="text"
               name="searchedStock"
               tabIndex={4}
-              placeholder="Search for stocks..."
+              placeholder="Search for stocks by symbol..."
             />
           </form>
         </div>
-        <div className="btns">
-          <NavLink to="/" className="btns__link btns__link--home">
+        <div className="mobile-links">
+          <NavLink to="/" className="mobile__link btns__link--home">
             Home
           </NavLink>
-          <NavLink to="/watchlist" className="btns__link btns__link--watchlist">
+          <NavLink to="/watchlist" className="mobile__link btns__link--watchlist">
             Watchlist
           </NavLink>
         </div>

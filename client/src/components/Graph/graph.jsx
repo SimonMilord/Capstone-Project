@@ -17,18 +17,21 @@ export default function Graph(props) {
       },
       tooltip: {
         intersect: false,
-      }
+      },
     },
     scales: {
       x: {
         grid: {
           display: false
         },
-        display: false
+        ticks: {
+          display: false
+        },
+        display: true
       },
       y: {
         grid: {
-          display: true
+          display: false,
         }
       }
     },

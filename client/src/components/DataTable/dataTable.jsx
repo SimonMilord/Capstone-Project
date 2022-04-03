@@ -7,7 +7,7 @@ export default function DataTable(props) {
 
   return (
     <div className='data'>
-      <div className='data__item'>
+      <div className='data__item data__item--first'>
         <p className='data__name'>Previous close</p>
         <div className='data__value'>{Number(props.quote.pc).toFixed(2)}</div>
       </div>

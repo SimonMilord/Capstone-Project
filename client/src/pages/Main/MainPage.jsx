@@ -6,7 +6,7 @@ import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
 import TimeSelector from "../../components/TimeSelector/timeSelector";
-import FooterMain from '../../components/FooterMain/footerMain';
+import FooterMain from '../../components/Footer/footerMain';
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./stockItem.scss";
 import axios from "axios";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
@@ -76,7 +77,7 @@ export default class StockItem extends Component {
           </div>
         </div>
         <button className="stock__delBtn" type="submit" value={this.state.stockInfo} onClick={this.deleteStock}>
-          X
+          <DeleteOutlineIcon />
         </button>
       </div>
     );

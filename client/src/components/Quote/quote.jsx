@@ -1,8 +1,17 @@
 import React from "react";
 import "./quote.scss";
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Quote(props) {
 
+  // capitalizes the company name
+  const formatName = (param) => {
+    let rawCompanyName = param.toLowerCase();
+    let formattedCompanyName = rawCompanyName.charAt(0).toUpperCase() + rawCompanyName.slice(1);
+    return formattedCompanyName;
+  }
   // Converts the exchange name to their accronyms
   const findExchange = (param) => {
     switch(param) {
@@ -26,25 +35,25 @@ export default function Quote(props) {
       <div className="quote__top">
         <div className="quote__company">
           <div className="quote__ticker">
-            {props.symbol} -{" "}
-            <span className="quote__exchange">{findExchange(props.profile.exchange)}</span>
+            {props.symbol} -{" "} {formatName(props.name)}
           </div>
-          <div className="quote__name">{props.name}</div>
+            <div className="quote__exchange">{findExchange(props.profile.exchange)}</div>
         </div>
-        <div className="quote__btn">
-          <button className="quote__addBtn" type="button" onClick={addStock}>
-            Add to watchlist
-          </button>
+        <div className="quote__btn" onClick={addStock}>
+          <AddIcon style={{ fill: 'white' }} />
+          <p className="quote__textBtn">Add to watchlist</p>
         </div>
       </div>
       <div className="quote__bottom">
-        <p className="quote__price">${Number(props.quote.c).toFixed(2)} (USD)</p>
-        <p className={props.quote.dp > 0 ? "quote__var" : "quote__var--down"}>
+        <div className="quote__price">${Number(props.quote.c).toFixed(2)} (USD)</div>
+        <div className={props.quote.dp > 0 ? "quote__var" : "quote__var--down"}>
+          {props.quote.d > 0 ? <ArrowUpwardIcon style={{ fill: 'green' }} fontSize="small"/> : <ArrowDownwardIcon style={{ fill: 'red' }} fontSize="small"/> }
           {Number(props.quote.dp).toFixed(2)}%
-        </p>
-        <p className={props.quote.dp > 0 ? "quote__var" : "quote__var--down"}>
+        </div>
+        <div className={props.quote.dp > 0 ? "quote__var" : "quote__var--down"}>
+          {props.quote.d > 0 ? <ArrowUpwardIcon style={{ fill: 'green' }} fontSize="small"/> : <ArrowDownwardIcon style={{ fill: 'red' }} fontSize="small"/> }
           {Number(props.quote.d).toFixed(2)}
-        </p>
+        </div>
       </div>
     </div>
   );

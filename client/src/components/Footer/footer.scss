@@ -24,5 +24,6 @@
   }
   &__img {
     height: 32px;
+    filter: invert(24%) sepia(0%) saturate(1402%) hue-rotate(202deg) brightness(97%) contrast(85%);
   }
 }

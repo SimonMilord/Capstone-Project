@@ -4,6 +4,7 @@
 
 .mainPage {
   @include paddingSection;
+  @include wrapper;
 
   &-top {
     margin-bottom: 2rem;

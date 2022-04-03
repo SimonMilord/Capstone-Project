@@ -43,7 +43,7 @@
     }
     .search {
       @include input;
-      border: 1px solid black;
+      border: 1px solid $input-text-color;
       padding: 8px 8px 8px 8px;
       width: 100%;
       @include display-flex(row,flex-start,center);
@@ -66,7 +66,7 @@
       }
     }
 
-    .btns {
+    .mobile-links {
       width: 100%;
       @include display-flex(row,space-around,center);
       margin: 1rem 0rem 0.5rem 0rem;
@@ -75,9 +75,15 @@
         width: 20%;
         margin: 0;
       }
-      &__link {
+      .mobile__link{
+        color:#4379FF;
+        text-decoration: none;
+        font-size: $main-font-size;
         @include tablet {
           display: none;
+        }
+        &:active {
+          color: $btn-hover-color;
         }
       }
     }

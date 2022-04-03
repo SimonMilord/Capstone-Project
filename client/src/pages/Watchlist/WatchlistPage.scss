@@ -1,3 +1,7 @@
 @import "../../styles/partials/fonts";
 @import "../../styles/partials/mixins";
 @import "../../styles/partials/variables";
+
+.watchlistPage {
+  @include wrapper;
+}

@@ -4,15 +4,21 @@
 
 .data {
   margin-top: 2rem;
+
   @include tablet {
-    border: 1px solid black;
+    border: 1px solid $input-text-color;
+    border-radius: $radius;
     padding: 2rem;
-    margin: 1rem 0rem;
+    margin: 2rem 0rem;
   }
   &__item {
     @include display-flex(row,space-between,center);
     padding: 0.5rem;
-    border-top: 1px solid black;
+    border-top: 1px solid $input-text-color;
+
+    &--first {
+      border-top: none;
+    }
   }
   &__name {
 

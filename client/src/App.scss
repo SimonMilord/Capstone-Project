@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  color: $input-text-color;
 }
 
 body {
@@ -16,5 +17,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    // .wrapper {
+    //   max-width: 1000px;
+    //   margin: 0 auto;
+    // }
   }
 }

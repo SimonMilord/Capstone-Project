@@ -7,7 +7,7 @@
     @include display-flex(row,space-between,center);
     margin-bottom: 1.5rem;
     @include tablet {
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid $input-text-color;
       padding: 0.5rem 0rem;
     }
   }
@@ -16,26 +16,35 @@
     font-size: 24px;
   }
   &__exchange {
-    font-size: 14px;
+    font-size: 16px;
+    color: rgb(189, 185, 185);
   }
   &__name {
     font-size: 18px;
   }
   &__btn {
-    // @include btn;
+    @include btn;
+    @include display-flex(row,center,center);
+    .quote__textBtn {
+      color: $global-white;
+    }
   }
   &__bottom {
     @include display-flex(row,flex-start,center);
     width:100%;
-    p {
+    div {
       margin-right: 1rem;
     }
   }
   &__var {
     color: $stock-up-color;
+    display: flex;
+    align-items: center;
   }
 
   &__var--down {
     color: $stock-down-color;
+    display: flex;
+    align-items: center;
   }
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./watchlist.scss";
 import StockItem from "../StockItem/stockItem";
 import axios from "axios";
+import AddIcon from '@mui/icons-material/Add';
 
 let clientAuthToken = sessionStorage.getItem("clientAuthToken");
 const serverURL = process.env.REACT_APP_SERVER_URL;
@@ -52,10 +53,11 @@ export default function Watchlist(props) {
     <div className="watchlist">
       <div className="watchlist-top">
         <h1 className="watchlist__title">Watchlist</h1>
-        <Link to="/">
-          <button className="watchlist__addBtn" type="button">
-            Add to watchlist
-          </button>
+        <Link to="/" className="watchlist__link">
+          <div className="watchlist__btn">
+            <AddIcon style={{ fill: 'white' }} />
+            <p className="watchlist__textBtn">Add to watchlist</p>
+          </div>
         </Link>
       </div>
       <div className="labels">
