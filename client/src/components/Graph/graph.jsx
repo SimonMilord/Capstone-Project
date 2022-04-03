@@ -8,6 +8,15 @@ export default function Graph(props) {
   // setting data sets for graph
   const pricesArray = props.chartData.c;
   const labels = props.chartData.t && (props.chartData.t).map(item => new Date(item*1000).toLocaleDateString());
+  let firstItem = pricesArray && pricesArray[0];
+  let lastItem = pricesArray && pricesArray[pricesArray.length - 1 ];
+
+  let borderColor = "";
+  if (firstItem > lastItem) {
+    borderColor = "red";
+  } else {
+    borderColor = "#4379FF";
+  }
 
   // config for chart formatting
   const options = {
@@ -45,7 +54,7 @@ const data = {
       id: 1,
       label: '',
       data: pricesArray,
-      borderColor: "#4379FF",
+      borderColor: borderColor,
       pointRadius: 0,
       pointHoverRadius: 6,
       tension: 0.5,
