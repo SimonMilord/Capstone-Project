@@ -4,7 +4,7 @@
 
 .stock {
   @include display-flex(row, space-between, center);
-  border-top: 1px solid black;
+  border-top: 1px solid $border-color;
   padding: 1rem 0rem;
   &-box {
     @include display-flex(row, space-between, center);
