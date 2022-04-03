@@ -23,18 +23,20 @@
       }
     }
   }
+
+  &-tooltip-wrap {
+    @include display-flex(row,space-between,center);
+  }
   &__item {
     @include display-flex(row,space-between,center);
-    padding: 0.5rem;
-    border-top: 1px solid $input-text-color;
+    padding: 1rem 0.5rem;
+    border-top: 1px solid $data-text-color;
 
     &--first {
       border-top: none;
     }
   }
-  &__name {
-    // insert tooltips here
-  }
+
   &__value {
 
     &--buy {

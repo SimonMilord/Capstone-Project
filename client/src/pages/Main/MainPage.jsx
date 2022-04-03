@@ -16,8 +16,6 @@ const defaultStock = "AAPL";
 const defaultTime = (new Date().setFullYear(new Date().getFullYear() - 1)/1000).toFixed();
 const today = (Date.now()/1000).toFixed();
 
-// console.log(clientAuthToken);
-
 export default class MainPage extends Component {
   state = {
     stock: defaultStock,
