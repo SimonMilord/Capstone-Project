@@ -6,12 +6,13 @@ import axios from 'axios';
 import Footer from '../../components/Footer/footer';
 
 const serverURL = process.env.REACT_APP_SERVER_URL;
-// console.log(serverURL);
 
 export default class SignUpPage extends Component {
 
   state = {
-
+    missingUsername: false,
+    missingPassword: false,
+    missingConfirm: false
   }
 
   handleRegister(event) {
@@ -20,17 +21,32 @@ export default class SignUpPage extends Component {
     const password = event.target.password.value;
     const confirmPass = event.target.confirm.value;
 
-    // TO VERIFY
     axios.post(`${serverURL}/signup`, {
       username: username,
       password: password,
       confirm: confirmPass
     }).then(response => {
-      // console.log("New User profile created");
+      console.log(response);
       window.location = '/login'
-    }).catch(err => console.log("sign up error", err))
-  }
-
+    }).catch(err => {
+      // if (!username) {
+      //   this.setState({
+      //     missingUsername: true
+      //   });
+      // }
+      // if (!password) {
+      //   this.setState({
+      //     missingPassword: true
+      //   });
+      // }
+      // if (!confirmPass) {
+      //   this.setState({
+      //     missingConfirm: true
+      //   })
+      // }
+      console.log("sign up error", err)
+    }
+  )}
   render() {
     return (
       <div className='signUpPage'>
@@ -40,19 +56,22 @@ export default class SignUpPage extends Component {
             <h1 className='signup__title'>Stonkers</h1>
           </div>
           <form className='signup__form' onSubmit={this.handleRegister}>
-            <input className='signup__input signup__input--username'
+            <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="text"
             name="username"
+            // required=""
             placeholder='Username'>
             </input>
-            <input className='signup__input signup__input--password'
+            <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="password"
             name="password"
+            // required=""
             placeholder='Password'>
             </input>
-            <input className='signup__input signup__input--cpassword'
+            <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="password"
             name="confirm"
+            // required=""
             placeholder='Confirm password'>
             </input>
             <button className='signup__btn signup__btn--login' type="submit" >Sign up</button>
