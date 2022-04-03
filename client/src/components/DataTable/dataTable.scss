@@ -30,7 +30,7 @@
   &__item {
     @include display-flex(row,space-between,center);
     padding: 1rem 0.5rem;
-    border-top: 1px solid $data-text-color;
+    border-top: 1px solid $light-border-color;
 
     &--first {
       border-top: none;
