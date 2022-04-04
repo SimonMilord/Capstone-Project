@@ -1,7 +1,6 @@
 @use "./fonts" as *;
 
 // breakpoints
-
 $breakpoints: (
   small: 320px,
   medium: 768px,
@@ -15,18 +14,17 @@ $stock-up-color: green;
 $stock-down-color: red;
 $global-white: #FFF;
 $global-black: #000;
-
 $main-color: #4379FF;
 $btn-hover-color: #5433FF;
-
 $input-text-color: #464646;
 $data-text-color: #a1a0a0;
 $light-border-color: #d6d6d6;
 $border-color: #a1a0a0;
-
 $rec-color-buy: green;
 $rec-color-hold: rbg(235, 200, 47);
 $rec-color-sell: red;
+$card-color-hover: rgba(211, 211, 211, 0.15);
+
 
 //font variables
 $main-font-regular: 'Roboto', sans-serif;
@@ -35,6 +33,7 @@ $main-font-regular: 'Roboto', sans-serif;
 
 $main-font-size: 16px;
 $secondary-font-size: 14px;
+$third-font-size: 12px;
 $quote-name: 20px;
 $logo-font-size: 24px;
 $labels-font-size: 18px;
@@ -43,5 +42,4 @@ $labels-font-size: 18px;
 // borders
 
 $radius: 12px;
-
 $tooltip-size: 16px;

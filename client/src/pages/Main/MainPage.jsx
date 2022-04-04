@@ -7,6 +7,7 @@ import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
 import TimeSelector from "../../components/TimeSelector/timeSelector";
 import FooterMain from '../../components/Footer/footerMain';
+import NewsSection from '../../components/NewsSection/newsSection';
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
@@ -16,6 +17,11 @@ const defaultStock = "AAPL";
 const defaultTime = (new Date().setFullYear(new Date().getFullYear() - 1)/1000).toFixed();
 const today = (Date.now()/1000).toFixed();
 
+let now = new Date();
+const fromNews = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7).toISOString().split('T')[0];
+const toNews = new Date().toISOString().split('T')[0];
+
+
 export default class MainPage extends Component {
   state = {
     stock: defaultStock,
@@ -23,10 +29,10 @@ export default class MainPage extends Component {
     stockQuote: {},
     stockFinancials: {},
     stockProfile: {},
-    stockNews: {},
     stockRatings: {},
     stockRecommendation: "",
     stockChartData: {},
+    stockNewsArray: [],
     fromPeriod: defaultTime,
     userWatchlist: [],
     inWatchlist: false,
@@ -39,6 +45,7 @@ export default class MainPage extends Component {
     this.getStockPriceData(defaultStock, defaultTime); // Data required for the chart
     this.getStockFinancials(defaultStock);
     this.getStockRatings(defaultStock);
+    this.getStockNews(defaultStock, fromNews, toNews);
     this.getWatchlist();
   }
 
@@ -54,6 +61,7 @@ export default class MainPage extends Component {
     this.getStockPriceData(quote, this.state.fromPeriod); // Data required for the chart
     this.getStockFinancials(quote);
     this.getStockRatings(quote);
+    this.getStockNews(quote, fromNews, toNews);
     this.getWatchlist();
   };
 
@@ -269,6 +277,19 @@ export default class MainPage extends Component {
         })
     }
 
+    // API call to get company specific news -- COMPANY NEWS
+    getStockNews(symbol, fromNews, toNews) {
+      axios
+        .get(`${URL}/company-news?symbol=${symbol}&from=${fromNews}&to=${toNews}&token=${KEY}`)
+        .then((res) => {
+          this.setState(() => ({
+            stockNewsArray: res.data.slice(0,10),
+          }));
+        }).catch((err) => {
+          console.log(err);
+        });
+    }
+
   render() {
     document.title = this.state.stock
       ? `Stonkers - ${this.state.stock}`
@@ -298,6 +319,9 @@ export default class MainPage extends Component {
               financials={this.state.stockFinancials}
               profile={this.state.stockProfile}
               recommendation={this.state.stockRecommendation}
+            />
+            <NewsSection
+              currentNews={this.state.stockNewsArray}
             />
           </div>
         </div>

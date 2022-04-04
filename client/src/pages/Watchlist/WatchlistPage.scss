@@ -5,7 +5,5 @@
 .watchlistPage {
   @include paddingSection;
   @include wrapper;
-  // @include tablet {
-  //   padding: 2rem;
-  // }
+  flex-grow: 1;
 }

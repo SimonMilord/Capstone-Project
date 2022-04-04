@@ -1,0 +1,58 @@
+@import "../../styles/partials/fonts";
+@import "../../styles/partials/mixins";
+@import "../../styles/partials/variables";
+
+.newsCard {
+
+
+  &__link {
+    @include display-flex(row,space-between,center);
+    text-decoration: none;
+  }
+  &__content{
+    @include display-flex(column,flex-start,flex-start);
+    height: 80px;
+    width: 100%;
+  }
+  &__top {
+    @include display-flex(row,flex-start,flex-start);
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: $third-font-size;
+    @include tablet {
+      margin-bottom: 2rem;
+      font-size: $secondary-font-size;
+    }
+  }
+  &__source {
+    font-weight: bold;
+  }
+  &__date {
+    color: #4646469c;
+  }
+  &__headline {
+    font-size: $secondary-font-size;
+    font-weight: bold;
+    @include tablet {
+      font-size: $main-font-size;
+
+      @include desktop {
+        font-size: $labels-font-size;
+      }
+    }
+  }
+  &__img {
+    margin-left: 1rem;
+
+    img {
+      height: 90px;
+      width: 135px;
+      border-radius: $radius;
+      @include tablet {
+        height: 100px;
+        width: 150px;
+      }
+
+    }
+  }
+}

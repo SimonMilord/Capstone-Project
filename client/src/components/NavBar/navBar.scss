@@ -13,9 +13,9 @@
 
   .nav {
     width: 100%;
+    margin-bottom: 1rem;
     @include display-flex(row, space-between, center);
-    @include tablet {
-    }
+
     &__img {
       height: 50px;
     }

@@ -3,7 +3,7 @@
 @import "../../styles/partials/variables";
 
 .data {
-  margin-top: 2rem;
+  margin: 2rem 0rem;
   @include tablet {
     max-width: $wrapper-width;
     border: 1px solid $border-color;

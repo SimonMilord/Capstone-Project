@@ -9,11 +9,10 @@
 
 body {
   font-family: $main-font-regular;
-  // height: 100vh;
   position: relative;
 
   .App {
-    // height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

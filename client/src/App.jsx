@@ -2,7 +2,6 @@ import "./App.scss";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MainPage from "./pages/Main/MainPage";
-// import Footer from "./components/Footer/footer";
 import WatchlistPage from "./pages/Watchlist/WatchlistPage";
 import LoginPage from "./pages/Login/LoginPage";
 import SignUpPage from "./pages/SignUp/SignUpPage";
