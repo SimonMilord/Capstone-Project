@@ -14,60 +14,52 @@ export default class App extends Component {
       <>
         <Router>
           <div className="App">
-            <div className="wrapper">
-              <Switch>
-                <Route
-                  path="/"
-                  exact
-                  render={(routerProps) => <MainPage {...routerProps} />}
-                />
-                <Route
-                  path="/main"
-                  render={(routerProps) => <MainPage {...routerProps} />}
-                />
-                <Route
-                  path="/login"
-                  exact
-                  render={(routerProps) => <LoginPage {...routerProps} />}
-                />
-                <Route
-                  path="/signup"
-                  exact
-                  render={(routerProps) => <SignUpPage {...routerProps} />}
-                />
-                <Route
-                  path="/watchlist"
-                  render={(routerProps) => <WatchlistPage {...routerProps} />}
-                />
-                {/* IN CASE I MAKE IT POSSIBLE TO ADD MORE THAN 1 WATCHLIST */}
-                {/* <Route
-                  path="/watchlist/:id"
-                  render={(routerProps) => <WatchlistPage {...routerProps} />}
-                /> */}
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={(routerProps) => <MainPage {...routerProps} />}
+              />
+              <Route
+                path="/main"
+                render={(routerProps) => <MainPage {...routerProps} />}
+              />
+              <Route
+                path="/login"
+                exact
+                render={(routerProps) => <LoginPage {...routerProps} />}
+              />
+              <Route
+                path="/signup"
+                exact
+                render={(routerProps) => <SignUpPage {...routerProps} />}
+              />
+              <Route
+                path="/watchlist"
+                render={(routerProps) => <WatchlistPage {...routerProps} />}
+              />
 
-                <Route
-                  path="/github"
-                  component={() => {
-                    window.location.replace("https://github.com/SimonMilord");
-                    return null;
-                  }}
-                />
-
-                <Route
-                  path="/linkedin"
-                  component={() => {
-                    window.location.replace(
-                      "https://www.linkedin.com/in/simonmilord/"
-                    );
-                    return null;
-                  }}
-                />
-              </Switch>
-            </div>
-            {/* <Footer /> */}
+              <Route
+                path="/github"
+                component={() => {
+                  window.location.replace("https://github.com/SimonMilord");
+                  return null;
+                }}
+              />
+              <Route
+                path="/linkedin"
+                component={() => {
+                  window.location.replace(
+                    "https://www.linkedin.com/in/simonmilord/"
+                  );
+                  return null;
+                }}
+              />
+            </Switch>
           </div>
         </Router>
       </>
     );
   }
 }
+

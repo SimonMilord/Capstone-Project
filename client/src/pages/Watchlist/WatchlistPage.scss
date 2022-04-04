@@ -3,5 +3,9 @@
 @import "../../styles/partials/variables";
 
 .watchlistPage {
+  @include paddingSection;
   @include wrapper;
+  // @include tablet {
+  //   padding: 2rem;
+  // }
 }

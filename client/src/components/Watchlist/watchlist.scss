@@ -3,7 +3,10 @@
 @import "../../styles/partials/variables";
 
 .watchlist {
-  @include paddingSection;
+  // @include paddingSection;
+  @include desktop {
+    padding: 2rem 0rem;
+  }
   &-top {
     @include display-flex(row,space-between,center);
     margin-bottom: 2rem;

@@ -16,8 +16,10 @@
   position: relative;
   // height: 100vh;
   margin: 0 auto;
+  width: 100%;
+
   @include desktop {
-    padding: 0rem 2rem;
+    padding: 0rem;
   }
 }
 
@@ -52,7 +54,14 @@
 }
 
 @mixin backgroundGradient {
-  background: linear-gradient(38deg, #ee7752, #e96195, #23a6d5, #23d5ab, #4379FF);
+  background: linear-gradient(
+    38deg,
+    #ee7752,
+    #e96195,
+    #23a6d5,
+    #23d5ab,
+    #4379ff
+  );
   background-size: 400% 400%;
   animation: gradient 12s ease infinite;
   height: 100vh;
@@ -114,7 +123,7 @@
 }
 
 @mixin link {
-  color:#4379FF;
+  color: #4379ff;
   text-decoration: none;
   font-size: $main-font-size;
 
@@ -126,7 +135,7 @@
   }
 }
 @mixin link-home {
-  color:#4379FF;
+  color: #4379ff;
   text-decoration: none;
   font-size: $main-font-size;
 
