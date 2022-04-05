@@ -7,8 +7,18 @@ import LoginPage from "./pages/Login/LoginPage";
 import SignUpPage from "./pages/SignUp/SignUpPage";
 
 export default class App extends Component {
-  render() {
+  state = {
+    searchedQuote: "",
+  };
 
+  handleSearchedQuote = (quote) => {
+    this.setState({
+      searchedQuote: quote,
+    });
+    console.log(this.state.searchedQuote + "in app.js");
+  };
+
+  render() {
     return (
       <>
         <Router>
@@ -17,7 +27,12 @@ export default class App extends Component {
               <Route
                 path="/"
                 exact
-                render={(routerProps) => <MainPage {...routerProps} />}
+                render={(routerProps) => (
+                  <MainPage
+                    {...routerProps}
+                    searchedQuote={this.state.searchedQuote}
+                  />
+                )}
               />
               <Route
                 path="/main"
@@ -35,7 +50,12 @@ export default class App extends Component {
               />
               <Route
                 path="/watchlist"
-                render={(routerProps) => <WatchlistPage {...routerProps} />}
+                render={(routerProps) => (
+                  <WatchlistPage
+                    {...routerProps}
+                    getSearchedQuote={this.handleSearchedQuote}
+                  />
+                )}
               />
 
               <Route
@@ -54,6 +74,10 @@ export default class App extends Component {
                   return null;
                 }}
               />
+              <Route
+                path="*"
+                render={(routerProps) => <MainPage {...routerProps} />}
+              />
             </Switch>
           </div>
         </Router>
@@ -61,4 +85,3 @@ export default class App extends Component {
     );
   }
 }
-

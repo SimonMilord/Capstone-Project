@@ -1,20 +1,38 @@
 import React from "react";
 import "./navBar.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter, useHistory } from "react-router-dom";
 import Logo from "../../assets/Logo/stonkers-logo.svg";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function NavBar(props) {
+function NavBar(props) {
+  const history = useHistory();
+
+  const submitted = (e) => {
+    if (props.location.pathname === "/watchlist") {
+      redirectHome(e);
+    } else {
+      handleSubmit(e);
+    }
+    e.preventDefault();
+  };
+
+  const redirectHome = async (e) => {
+    await props.redirect(e.target.searchedStock.value.toUpperCase());
+    e.preventDefault();
+    history.push("/");
+    e.target.searchedStock.value = "";
+  };
 
   const handleSubmit = (e) => {
     props.getQuote(e.target.searchedStock.value.toUpperCase());
     e.preventDefault();
     e.target.searchedStock.value = "";
+    console.log("normal submit");
   };
 
   const handleSignout = () => {
     sessionStorage.clear();
-  }
+  };
 
   return (
     <div className="navBar">
@@ -46,10 +64,7 @@ export default function NavBar(props) {
       <div className="navBar-bottom">
         <div className="search">
           <SearchIcon color="action" />
-          <form
-            className="search__form"
-            onSubmit={handleSubmit}
-          >
+          <form className="search__form" onSubmit={submitted}>
             <input
               className="search__input"
               type="text"
@@ -63,7 +78,10 @@ export default function NavBar(props) {
           <NavLink to="/" className="mobile__link btns__link--home">
             Home
           </NavLink>
-          <NavLink to="/watchlist" className="mobile__link btns__link--watchlist">
+          <NavLink
+            to="/watchlist"
+            className="mobile__link btns__link--watchlist"
+          >
             Watchlist
           </NavLink>
         </div>
@@ -71,3 +89,5 @@ export default function NavBar(props) {
     </div>
   );
 }
+
+export default withRouter(NavBar);

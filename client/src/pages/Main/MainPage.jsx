@@ -6,25 +6,30 @@ import Quote from "../../components/Quote/quote";
 import Graph from "../../components/Graph/graph";
 import DataTable from "../../components/DataTable/dataTable";
 import TimeSelector from "../../components/TimeSelector/timeSelector";
-import FooterMain from '../../components/Footer/footerMain';
-import NewsSection from '../../components/NewsSection/newsSection';
+import FooterMain from "../../components/Footer/footerMain";
+import NewsSection from "../../components/NewsSection/newsSection";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
 const serverURL = process.env.REACT_APP_SERVER_URL;
-let clientAuthToken = sessionStorage.getItem('clientAuthToken');
-const defaultStock = "AAPL";
-const defaultTime = (new Date().setFullYear(new Date().getFullYear() - 1)/1000).toFixed();
-const today = (Date.now()/1000).toFixed();
-
-let now = new Date();
-const fromNews = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7).toISOString().split('T')[0];
-const toNews = new Date().toISOString().split('T')[0];
-
+let clientAuthToken = sessionStorage.getItem("clientAuthToken");
+let defaultStock = "AAPL";
+const defaultTime = (
+  new Date().setFullYear(new Date().getFullYear() - 1) / 1000
+).toFixed();
+const today = (Date.now() / 1000).toFixed();
+const fromNews = new Date(
+  new Date().getFullYear(),
+  new Date().getMonth(),
+  new Date().getDate() - 7
+)
+  .toISOString()
+  .split("T")[0];
+const toNews = new Date().toISOString().split("T")[0];
 
 export default class MainPage extends Component {
   state = {
-    stock: defaultStock,
+    stock: "",
     stockName: "APPLE INC",
     stockQuote: {},
     stockFinancials: {},
@@ -38,20 +43,34 @@ export default class MainPage extends Component {
     inWatchlist: false,
   };
 
-
   // Life cycle methods
-  componentDidMount() {
-    this.getStockProfile(defaultStock);
-    this.getStockQuote(defaultStock);
-    this.getStockPriceData(defaultStock, defaultTime); // Data required for the chart
-    this.getStockFinancials(defaultStock);
-    this.getStockRatings(defaultStock);
-    this.getStockNews(defaultStock, fromNews, toNews);
+  async componentDidMount() {
+    if (this.props.searchedQuote) {
+      await this.setStateAsync({
+        stock: this.props.searchedQuote,
+      });
+    } else {
+      await this.setStateAsync({
+        stock: defaultStock,
+      });
+    }
+    this.getStockProfile(this.state.stock);
+    this.getStockQuote(this.state.stock);
+    this.getStockPriceData(this.state.stock, defaultTime); // Data required for the chart
+    this.getStockFinancials(this.state.stock);
+    this.getStockRatings(this.state.stock);
+    this.getStockNews(this.state.stock, fromNews, toNews);
     this.getWatchlist();
   }
 
-  // ----- HANDLER FUNCTIONS -----
+  // wraps the setState in a promise to use async/await
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    });
+  }
 
+  // ----- HANDLER FUNCTIONS -----
   // functions that call API request functions once a stock is searched
   handleQuoteData = (quote) => {
     this.setState({
@@ -68,90 +87,113 @@ export default class MainPage extends Component {
 
   //functions that handles time period for graph
   handleTimeData = (period) => {
-    this.setState({
-      fromPeriod: period,
-    }, () => {
-      this.getStockPriceData(this.state.stock, this.state.fromPeriod);
-    });
-  }
+    this.setState(
+      {
+        fromPeriod: period,
+      },
+      () => {
+        this.getStockPriceData(this.state.stock, this.state.fromPeriod);
+      }
+    );
+  };
 
   // function to add stock to watchlist
   handleAddStock = () => {
-    axios.put(`${serverURL}/watchlist`, {
-      symbol: this.state.stockProfile.ticker,
-      name: this.state.stockProfile.name
-    }, {
-      headers: {
-        authorization: `Bearer ${clientAuthToken}`,
-      }
-    }).then(response => {
-      if (response.data.filter(e => e.symbol === this.state.stockProfile.ticker).length > 0) {
-        this.setState({
-          inWatchlist: true,
-        });
-      } else {
-        this.setState({
-          inWatchlist: false,
-        });
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+    axios
+      .put(
+        `${serverURL}/watchlist`,
+        {
+          symbol: this.state.stockProfile.ticker,
+          name: this.state.stockProfile.name,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${clientAuthToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (
+          response.data.filter(
+            (e) => e.symbol === this.state.stockProfile.ticker
+          ).length > 0
+        ) {
+          this.setState({
+            inWatchlist: true,
+          });
+        } else {
+          this.setState({
+            inWatchlist: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   handleRemoveStock = (symbol) => {
-    axios.put(`${serverURL}/watchlist/${symbol}`,
-      {
-        symbol: this.state.stockProfile.ticker,
-        name: this.state.stockProfile.name
-      }, {
-        headers: {
-          authorization: `Bearer ${clientAuthToken}`,
+    axios
+      .put(
+        `${serverURL}/watchlist/${symbol}`,
+        {
+          symbol: this.state.stockProfile.ticker,
+          name: this.state.stockProfile.name,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${clientAuthToken}`,
+          },
         }
-      }
-    )
-    .then((response) => {
-      if (response.data.filter(e => e.symbol === this.state.stockProfile.ticker).length > 0) {
-        this.setState({
-          inWatchlist: true,
-        });
-      } else {
-        this.setState({
-          inWatchlist: false,
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+      )
+      .then((response) => {
+        if (
+          response.data.filter(
+            (e) => e.symbol === this.state.stockProfile.ticker
+          ).length > 0
+        ) {
+          this.setState({
+            inWatchlist: true,
+          });
+        } else {
+          this.setState({
+            inWatchlist: false,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   getWatchlist = () => {
     axios
-    .get(`${serverURL}/watchlist`, {
-      headers: {
-        authorization: `Bearer ${clientAuthToken}`,
-      },
-    })
-    .then((response) => {
-      if (response.data.filter(e => e.symbol === this.state.stock).length > 0) {
+      .get(`${serverURL}/watchlist`, {
+        headers: {
+          authorization: `Bearer ${clientAuthToken}`,
+        },
+      })
+      .then((response) => {
+        if (
+          response.data.filter((e) => e.symbol === this.state.stock).length > 0
+        ) {
+          this.setState({
+            inWatchlist: true,
+          });
+        } else {
+          this.setState({
+            inWatchlist: false,
+          });
+        }
         this.setState({
-          inWatchlist: true,
+          userWatchlist: response.data,
         });
-      } else {
-        this.setState({
-          inWatchlist: false,
-        });
-      }
-      this.setState({
-        userWatchlist: response.data
+        this.getStockProfile(this.state.stock);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      this.getStockProfile(this.state.stock);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+  };
 
   // ----- API CALLS -----
   // API call to get Name and symbol of the company - SYMBOL LOOKUP
@@ -184,13 +226,13 @@ export default class MainPage extends Component {
         );
         this.setState({
           stockQuote: {
-            "c": "N/A",
-            "d": null,
-            "dp": null,
-            "h": null,
-            "l": null,
-            "pc": null,
-          }
+            c: "N/A",
+            d: null,
+            dp: null,
+            h: null,
+            l: null,
+            pc: null,
+          },
         });
       });
   }
@@ -264,37 +306,42 @@ export default class MainPage extends Component {
       });
   }
 
-    // API call to get the 5 years stock price data for the chart - CANDLES
-    getStockPriceData(symbol, from) {
-      axios
-        .get(`${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${today}&token=${KEY}`)
-        .then((res) => {
-          this.setState(() => ({
-            stockChartData: res.data,
-          }));
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-    }
+  // API call to get the 5 years stock price data for the chart - CANDLES
+  getStockPriceData(symbol, from) {
+    axios
+      .get(
+        `${URL}/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${today}&token=${KEY}`
+      )
+      .then((res) => {
+        this.setState(() => ({
+          stockChartData: res.data,
+        }));
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
-    // API call to get company specific news -- COMPANY NEWS
-    getStockNews(symbol, fromNews, toNews) {
-      axios
-        .get(`${URL}/company-news?symbol=${symbol}&from=${fromNews}&to=${toNews}&token=${KEY}`)
-        .then((res) => {
-          this.setState(() => ({
-            stockNewsArray: res.data.slice(0,10),
-          }));
-        }).catch((err) => {
-          console.log(err);
-        });
-    }
+  // API call to get company specific news -- COMPANY NEWS
+  getStockNews(symbol, fromNews, toNews) {
+    axios
+      .get(
+        `${URL}/company-news?symbol=${symbol}&from=${fromNews}&to=${toNews}&token=${KEY}`
+      )
+      .then((res) => {
+        this.setState(() => ({
+          stockNewsArray: res.data.slice(0, 10),
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     document.title = this.state.stock
       ? `Stonkers - ${this.state.stock}`
-      : "Stonkers"
+      : "Stonkers";
     return (
       <>
         <NavBar getQuote={this.handleQuoteData} />
@@ -303,17 +350,15 @@ export default class MainPage extends Component {
             <Quote
               quote={this.state.stockQuote}
               profile={this.state.stockProfile}
-              addBtn = {this.handleAddStock}
-              deleteBtn = {this.handleRemoveStock}
-              inWatchlistStatus = {this.state.inWatchlist}
+              addBtn={this.handleAddStock}
+              deleteBtn={this.handleRemoveStock}
+              inWatchlistStatus={this.state.inWatchlist}
             />
           </div>
           <div className="mainPage-bottom">
             <div className="line-chart">
-              <TimeSelector getTime={this.handleTimeData}/>
-              <Graph
-                chartData={this.state.stockChartData}
-              />
+              <TimeSelector getTime={this.handleTimeData} />
+              <Graph chartData={this.state.stockChartData} />
             </div>
             <DataTable
               quote={this.state.stockQuote}
@@ -321,9 +366,7 @@ export default class MainPage extends Component {
               profile={this.state.stockProfile}
               recommendation={this.state.stockRecommendation}
             />
-            <NewsSection
-              currentNews={this.state.stockNewsArray}
-            />
+            <NewsSection currentNews={this.state.stockNewsArray} />
           </div>
         </div>
         <FooterMain />
