@@ -11,24 +11,23 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 export default function Watchlist(props) {
   const [currentWatchlist, setcurrentWatchlist] = useState([]);
 
-  console.log(currentWatchlist);
   useEffect(() => {
     getWatchlist();
   }, []);
 
   function getWatchlist() {
     axios
-      .get(`${serverURL}/watchlist`, {
-        headers: {
-          authorization: `Bearer ${clientAuthToken}`,
-        },
-      })
-      .then((response) => {
-        setcurrentWatchlist(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .get(`${serverURL}/watchlist`, {
+      headers: {
+        authorization: `Bearer ${clientAuthToken}`,
+      },
+    })
+    .then((response) => {
+      setcurrentWatchlist(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   function handleDeleteStock(stockQuote) {
@@ -48,7 +47,8 @@ export default function Watchlist(props) {
       .catch((err) => {
         console.log(err);
       });
-  }
+    }
+
 
   return (
     <div className="watchlist">

@@ -12,16 +12,8 @@ export default class WatchlistPage extends Component {
     searchedQuote: ""
   }
 
-  // wraps the setState in a promise to use async/await
-  setStateAsync(state) {
-    return new Promise((resolve) => {
-      this.setState(state, resolve)
-    });
-  }
-
-
   handleRedirect = async(quote) => {
-    await this.setStateAsync({
+    await this.setState({
       searchedQuote: quote,
     }, () => {
       this.props.getSearchedQuote(this.state.searchedQuote);

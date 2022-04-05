@@ -15,7 +15,6 @@ export default class App extends Component {
     this.setState({
       searchedQuote: quote,
     });
-    console.log(this.state.searchedQuote + "in app.js");
   };
 
   render() {
