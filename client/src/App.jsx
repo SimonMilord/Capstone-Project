@@ -27,20 +27,21 @@ export default class App extends Component {
                 path="/"
                 exact
                 render={(routerProps) => (
-                  <MainPage
+                  <LoginPage
                     {...routerProps}
-                    searchedQuote={this.state.searchedQuote}
                   />
                 )}
-              />
-              <Route
-                path="/main"
-                render={(routerProps) => <MainPage {...routerProps} />}
               />
               <Route
                 path="/login"
                 exact
                 render={(routerProps) => <LoginPage {...routerProps} />}
+              />
+              <Route
+                path="/main"
+                render={(routerProps) => <MainPage {...routerProps}
+                searchedQuote={this.state.searchedQuote}
+                />}
               />
               <Route
                 path="/signup"

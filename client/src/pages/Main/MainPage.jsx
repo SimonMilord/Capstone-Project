@@ -41,11 +41,19 @@ export default class MainPage extends Component {
     fromPeriod: defaultTime,
     userWatchlist: [],
     inWatchlist: false,
+    stockNotFound: false,
   };
+
+  // wraps the setState in a promise to use async/await
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve);
+    });
+  }
 
   // Life cycle methods
   async componentDidMount() {
-    if (this.props.searchedQuote) {
+    if (this.props.searchedQuote !== "") {
       await this.setStateAsync({
         stock: this.props.searchedQuote,
       });
@@ -63,20 +71,14 @@ export default class MainPage extends Component {
     this.getWatchlist();
   }
 
-  // wraps the setState in a promise to use async/await
-  setStateAsync(state) {
-    return new Promise((resolve) => {
-      this.setState(state, resolve)
-    });
-  }
-
   // ----- HANDLER FUNCTIONS -----
   // functions that call API request functions once a stock is searched
-  handleQuoteData = (quote) => {
-    this.setState({
-      stock: quote,
-    });
-    this.getStockProfile(quote);
+  handleQuoteData = async (quote) => {
+    await this.setState({ stock: quote });
+    if (!this.state.stock) {
+      this.setState({stockNotFound: true});
+    }
+    this.getStockProfile(this.state.stock);
     this.getStockQuote(quote);
     this.getStockPriceData(quote, this.state.fromPeriod); // Data required for the chart
     this.getStockFinancials(quote);
@@ -188,7 +190,6 @@ export default class MainPage extends Component {
         this.setState({
           userWatchlist: response.data,
         });
-        this.getStockProfile(this.state.stock);
       })
       .catch((err) => {
         console.log(err);
@@ -221,9 +222,7 @@ export default class MainPage extends Component {
         });
       })
       .catch((err) => {
-        alert(
-          "Hi!, Please note the current version only supports US stocks for now."
-        );
+        console.log(err);
         this.setState({
           stockQuote: {
             c: "N/A",
@@ -256,14 +255,17 @@ export default class MainPage extends Component {
     axios
       .get(`${URL}/stock/profile2?symbol=${symbol}&token=${KEY}`)
       .then((res) => {
-        this.setState({
-          stock: res.data.ticker,
-          stockName: res.data.name,
-          stockProfile: res.data,
-        });
+        this.setState(
+          {
+            stock: res.data.ticker,
+            stockName: res.data.name,
+            stockProfile: res.data,
+          }
+        );
       })
       .catch((err) => {
         console.error(err);
+        console.log("asdnfsjkdnfjksdn");
       });
   }
 

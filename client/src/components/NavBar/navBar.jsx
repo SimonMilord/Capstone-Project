@@ -18,16 +18,13 @@ function NavBar(props) {
 
   const redirectHome = async (e) => {
     await props.redirect(e.target.searchedStock.value.toUpperCase());
-    e.preventDefault();
-    history.push("/");
+    history.push("/main");
     e.target.searchedStock.value = "";
   };
 
-  const handleSubmit = (e) => {
-    props.getQuote(e.target.searchedStock.value.toUpperCase());
-    e.preventDefault();
+  const handleSubmit = async(e) => {
+    await props.getQuote(e.target.searchedStock.value.toUpperCase());
     e.target.searchedStock.value = "";
-    console.log("normal submit");
   };
 
   const handleSignout = () => {
@@ -38,10 +35,10 @@ function NavBar(props) {
     <div className="navBar">
       <div className="nav">
         <div className="nav__left">
-          <NavLink to="/" className="nav__logo">
+          <NavLink to="/main" className="nav__logo">
             <img className="nav__img" src={Logo} alt="stonkers logo"></img>
           </NavLink>
-          <NavLink to="/" className="nav__link nav__link--home" tabIndex={1}>
+          <NavLink to="/main" className="nav__link nav__link--home" tabIndex={1}>
             Home
           </NavLink>
           <NavLink
@@ -75,7 +72,7 @@ function NavBar(props) {
           </form>
         </div>
         <div className="mobile-links">
-          <NavLink to="/" className="mobile__link btns__link--home">
+          <NavLink to="/main" className="mobile__link btns__link--home">
             Home
           </NavLink>
           <NavLink

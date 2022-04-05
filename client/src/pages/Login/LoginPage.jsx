@@ -74,7 +74,7 @@ export default class LoginPage extends Component {
       this.setState({
         profile: response.data
       });
-      window.location = '/'
+      window.location = '/main'
     }).catch(err => console.log('Profile-error', err))
   }
 

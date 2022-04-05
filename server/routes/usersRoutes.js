@@ -4,6 +4,8 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 const User = require("./../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+
 
 const authorize = (req, res, next) => {
   if (req.path === "/user/login" || req.path === "/user/signup") {
@@ -33,6 +35,11 @@ const authorize = (req, res, next) => {
     });
   }
 };
+
+// hash function
+const hashPassword = (password) => {
+  return bcrypt.hashSync(password, 12);
+}
 
 // ------ USER ROUTES -----
 
@@ -68,7 +75,9 @@ router.post("/login", async (req, res, next) => {
     return res.status(404).json({ message: `No user found with that username` });
   }
 
-  if (foundUser.password === req.body.password) {
+  const matchPasswords = bcrypt.compareSync(req.body.password, foundUser.password);
+
+  if (matchPasswords) {
     const token = jwt.sign(
       {
         username: foundUser.username,

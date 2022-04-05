@@ -27,6 +27,16 @@ userSchema.methods = {
   }
 };
 
+userSchema.pre('save', function (next) {
+  if (!this.password) {
+      next();
+  } else {
+      this.password = this.hashPassword(this.password);
+      next();
+  }
+});
+
+
 // compiling user schema into a model
 const User = mongoose.model('User', userSchema);
 
