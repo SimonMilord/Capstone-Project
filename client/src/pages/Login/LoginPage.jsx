@@ -79,6 +79,7 @@ export default class LoginPage extends Component {
   }
 
   render() {
+    document.title = "Stonkers - Login"
     return (
       <>
         {!this.state.isLoggedIn &&

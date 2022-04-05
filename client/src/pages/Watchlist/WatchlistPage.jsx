@@ -22,6 +22,7 @@ export default class WatchlistPage extends Component {
 
 
   render() {
+    document.title = "Watchlist";
     return (
       <>
         <NavBar redirect={this.handleRedirect}/>

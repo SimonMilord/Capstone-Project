@@ -190,7 +190,7 @@ export default class MainPage extends Component {
         this.setState({
           userWatchlist: response.data,
         });
-        this.getStockProfile(this.state.stock);
+        // this.getStockProfile(this.state.stock);
       })
       .catch((err) => {
         console.log(err);

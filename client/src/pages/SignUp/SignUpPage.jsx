@@ -48,6 +48,7 @@ export default class SignUpPage extends Component {
     }
   )}
   render() {
+    document.title = "Stonkers - Signup";
     return (
       <div className='signUpPage'>
         <div className='signup'>
