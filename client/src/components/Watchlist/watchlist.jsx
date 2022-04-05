@@ -4,12 +4,21 @@ import "./watchlist.scss";
 import StockItem from "../StockItem/stockItem";
 import axios from "axios";
 import AddIcon from '@mui/icons-material/Add';
+import  { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 let clientAuthToken = sessionStorage.getItem("clientAuthToken");
 const serverURL = process.env.REACT_APP_SERVER_URL;
 
 export default function Watchlist(props) {
   const [currentWatchlist, setcurrentWatchlist] = useState([]);
+
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
+    const items = Array.from(currentWatchlist);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setcurrentWatchlist(items);
+  }
 
   useEffect(() => {
     getWatchlist();
@@ -79,18 +88,29 @@ export default function Watchlist(props) {
           </div>
         </div>
       </div>
-      <ul className="watchlist__list">
-        {currentWatchlist &&
-          currentWatchlist.map((stockItem) => (
-            <li className="watchlist__item" key={stockItem.symbol} draggable="true">
-              <StockItem
-                symbol={stockItem.symbol}
-                name={stockItem.name}
-                deleteItem={handleDeleteStock}
-              />
-            </li>
-          ))}
-      </ul>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="items">
+          {(provided) => (
+          <ul className="watchlist__list" {...provided.droppableProps} ref={provided.innerRef}>
+            {currentWatchlist &&
+              currentWatchlist.map((stockItem, index) => (
+                <Draggable key={stockItem.symbol} draggableId={stockItem.symbol} index={index}>
+                  {(provided) => (
+                    <li className="watchlist__item" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                      <StockItem
+                        symbol={stockItem.symbol}
+                        name={stockItem.name}
+                        deleteItem={handleDeleteStock}
+                      />
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+          </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
