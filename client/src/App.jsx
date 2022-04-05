@@ -77,7 +77,7 @@ export default class App extends Component {
               />
               <Route
                 path="*"
-                render={(routerProps) => <MainPage {...routerProps} />}
+                render={(routerProps) => <LoginPage {...routerProps} />}
               />
             </Switch>
           </div>

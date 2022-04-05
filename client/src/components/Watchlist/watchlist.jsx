@@ -66,7 +66,7 @@ export default function Watchlist(props) {
     <div className="watchlist">
       <div className="watchlist-top">
         <h1 className="watchlist__title">Watchlist</h1>
-        <Link to="/" className="watchlist__link">
+        <Link to="/main" className="watchlist__link">
           <div className="watchlist__btn">
             <AddIcon style={{ fill: "white" }} />
             <p className="watchlist__textBtn">Add to watchlist</p>
