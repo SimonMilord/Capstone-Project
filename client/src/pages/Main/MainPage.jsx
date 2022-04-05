@@ -190,6 +190,7 @@ export default class MainPage extends Component {
         this.setState({
           userWatchlist: response.data,
         });
+        this.getStockProfile(this.state.stock);
       })
       .catch((err) => {
         console.log(err);
@@ -265,7 +266,6 @@ export default class MainPage extends Component {
       })
       .catch((err) => {
         console.error(err);
-        console.log("asdnfsjkdnfjksdn");
       });
   }
 
