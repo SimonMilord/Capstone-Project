@@ -1,11 +1,16 @@
 import "./newsCard.scss";
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 import stonkImg from "../../assets/Images/stonks.jpeg";
 
 export default function newsCard(props) {
   const url = props.linkurl;
-  const newsDate = new Date(props.date*1000).toISOString().split('T')[0].split("-").reverse().join("-");
+  const newsDate = new Date(props.date * 1000)
+    .toISOString()
+    .split("T")[0]
+    .split("-")
+    .reverse()
+    .join("-");
 
   return (
     <div className="newsCard">
@@ -17,26 +22,16 @@ export default function newsCard(props) {
           </div>
           <div className="newsCard__headline">{props.headline}</div>
         </div>
-        {props.image ?
+        {props.image ? (
           <div className="newsCard__img">
-            <img
-              src={props.image}
-              alt="not found"
-            />
-          </div> :
-            <div className="newsCard__img">
-            <img
-              src={stonkImg}
-              alt="not found"
-              />
+            <img src={props.image} alt="not found" />
           </div>
-        }
+        ) : (
+          <div className="newsCard__img">
+            <img src={stonkImg} alt="not found" />
+          </div>
+        )}
       </Link>
     </div>
   );
 }
-
-
-
-
-

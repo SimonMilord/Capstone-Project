@@ -38,6 +38,7 @@ export default class MainPage extends Component {
     inWatchlist: false,
   };
 
+
   // Life cycle methods
   componentDidMount() {
     this.getStockProfile(defaultStock);

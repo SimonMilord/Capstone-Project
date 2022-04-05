@@ -13,11 +13,19 @@ export default class LoginPage extends Component {
     isLoggedIn: false,
     profile: null,
     missingUsername: false,
-    missingPassword: false
+    missingPassword: false,
+    userNotFound: false,
+    loginError: ""
   }
 
   handleLogin = (e) => {
     e.preventDefault();
+    this.setState({
+      missingUsername: false,
+      missingPassword: false,
+      userNotFound: false,
+      loginError: ""
+    });
     const username = e.target.username.value;
     const password = e.target.password.value;
 
@@ -31,17 +39,27 @@ export default class LoginPage extends Component {
       });
       this.fetchProfile(response.data.token);
     }).catch(err => {
-      // if (!username) {
-      //   this.setState({
-      //     missingUsername: true
-      //   });
-      // }
-      // if (!password) {
-      //   this.setState({
-      //     missingPassword: true
-      //   });
-      // }
-      // console.log("login error", err);
+      if (!username) {
+        this.setState({
+          missingUsername: true
+        });
+      }
+      if (!password) {
+        this.setState({
+          missingPassword: true
+        });
+      }
+      if (err.response.status === 404 && username && password) {
+        this.setState({
+          userNotFound: true,
+          loginError: err.response.data.message,
+        })
+      }
+      if (err.response.status === 403) {
+        this.setState({
+          loginError: err.response.data.message,
+        })
+      }
     }
   )}
 
@@ -71,13 +89,19 @@ export default class LoginPage extends Component {
                 <h1 className='login__title'>Stonkers</h1>
               </div>
               <form className='login__form' onSubmit={this.handleLogin}>
-                <input className={this.state.missingUsername ? "login__input login__input--invalid" : "login__input"}
+                {(this.state.loginError !== "" || this.state.userNotFound) &&
+                  <span className='login__span'>{this.state.loginError}</span>
+                }
+                {(this.state.missingUsername || this.state.missingPassword) &&
+                  <span className='login__span'>Please enter username and password</span>
+                }
+                <input className={this.state.missingUsername || this.state.loginError !== "" || this.userNotFound ? "login__input login__input--invalid" : "login__input"}
                 type="text"
                 name="username"
                 required=""
                 placeholder='Username'>
                 </input>
-                <input className={this.state.missingPassword ? "login__input login__input--invalid" : "login__input"}
+                <input className={this.state.missingPassword || this.state.loginError !== "" || this.userNotFound ? "login__input login__input--invalid" : "login__input"}
                 type="password"
                 name="password"
                 required=""

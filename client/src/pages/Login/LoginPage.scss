@@ -35,6 +35,11 @@
         border-color: red;
       }
     }
+    &__span {
+      padding: 5px 0px;
+      border-radius: $radius;
+      font-size: $secondary-font-size;
+    }
     &__btn {
       margin: 0.5rem 0rem;
       @include btn;

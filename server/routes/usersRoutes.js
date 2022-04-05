@@ -65,7 +65,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res, next) => {
   const foundUser = await User.findOne({ username: req.body.username }).exec();
   if (!foundUser) {
-    return res.status(403).json({ message: "No such user." });
+    return res.status(404).json({ message: `No user found with that username` });
   }
 
   if (foundUser.password === req.body.password) {
@@ -78,7 +78,7 @@ router.post("/login", async (req, res, next) => {
     );
     return res.json({ token: token, userData: req.tokenData });
   } else {
-    return res.status(403).json({ message: "Invalid username or password." });
+    return res.status(403).json({ message: "Invalid password" });
   }
 });
 

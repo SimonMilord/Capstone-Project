@@ -29,21 +29,21 @@ export default class SignUpPage extends Component {
       console.log(response);
       window.location = '/login'
     }).catch(err => {
-      // if (!username) {
-      //   this.setState({
-      //     missingUsername: true
-      //   });
-      // }
-      // if (!password) {
-      //   this.setState({
-      //     missingPassword: true
-      //   });
-      // }
-      // if (!confirmPass) {
-      //   this.setState({
-      //     missingConfirm: true
-      //   })
-      // }
+      if (!username) {
+        this.setState({
+          missingUsername: true
+        });
+      }
+      if (!password) {
+        this.setState({
+          missingPassword: true
+        });
+      }
+      if (!confirmPass) {
+        this.setState({
+          missingConfirm: true
+        })
+      }
       console.log("sign up error", err)
     }
   )}
@@ -59,19 +59,19 @@ export default class SignUpPage extends Component {
             <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="text"
             name="username"
-            // required=""
+            required=""
             placeholder='Username'>
             </input>
             <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="password"
             name="password"
-            // required=""
+            required=""
             placeholder='Password'>
             </input>
             <input className={this.state.missingUsername ? "signup__input signup__input--invalid" : "signup__input"}
             type="password"
             name="confirm"
-            // required=""
+            required=""
             placeholder='Confirm password'>
             </input>
             <button className='signup__btn signup__btn--login' type="submit" >Sign up</button>
