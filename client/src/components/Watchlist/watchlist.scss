@@ -3,12 +3,11 @@
 @import "../../styles/partials/variables";
 
 .watchlist {
-  // @include paddingSection;
   @include desktop {
     padding: 2rem 0rem;
   }
   &-top {
-    @include display-flex(row,space-between,center);
+    @include display-flex(row, space-between, center);
     margin-bottom: 2rem;
   }
   &__link {
@@ -17,7 +16,7 @@
 
   &__btn {
     @include btn;
-    @include display-flex(row,center,center);
+    @include display-flex(row, center, center);
   }
 
   &__textBtn {
@@ -28,7 +27,7 @@
   }
 
   .labels {
-    @include display-flex(row,space-between,center);
+    @include display-flex(row, space-between, center);
     display: flex;
     width: 90%;
     margin-bottom: 1rem;
@@ -37,7 +36,7 @@
 
     &__left {
       width: 57%;
-      @include display-flex(row,space-between,center);
+      @include display-flex(row, space-between, center);
     }
     &__item {
       width: 50%;
@@ -52,7 +51,7 @@
     }
     &__right {
       width: 43%;
-      @include display-flex(row,space-between,center);
+      @include display-flex(row, space-between, center);
     }
   }
 }

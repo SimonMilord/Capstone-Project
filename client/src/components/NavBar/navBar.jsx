@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 function NavBar(props) {
   const history = useHistory();
-
+  // handles search submit depending on page location
   const submitted = (e) => {
     if (props.location.pathname === "/watchlist") {
       redirectHome(e);
@@ -22,7 +22,7 @@ function NavBar(props) {
     e.target.searchedStock.value = "";
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     await props.getQuote(e.target.searchedStock.value.toUpperCase());
     e.target.searchedStock.value = "";
   };
@@ -38,7 +38,11 @@ function NavBar(props) {
           <NavLink to="/main" className="nav__logo">
             <img className="nav__img" src={Logo} alt="stonkers logo"></img>
           </NavLink>
-          <NavLink to="/main" className="nav__link nav__link--home" tabIndex={1}>
+          <NavLink
+            to="/main"
+            className="nav__link nav__link--home"
+            tabIndex={1}
+          >
             Home
           </NavLink>
           <NavLink

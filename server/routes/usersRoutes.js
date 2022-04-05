@@ -4,9 +4,9 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 const User = require("./../models/user");
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
-
+// checks and verifies the user JWT token
 const authorize = (req, res, next) => {
   if (req.path === "/user/login" || req.path === "/user/signup") {
     next();
@@ -36,12 +36,7 @@ const authorize = (req, res, next) => {
   }
 };
 
-// hash function
-const hashPassword = (password) => {
-  return bcrypt.hashSync(password, 12);
-}
-
-// ------ USER ROUTES -----
+// ------ USER ROUTES ----- //
 
 // GET a user by ID
 router.get("/", authorize, (req, res) => {
@@ -59,7 +54,7 @@ router.post("/signup", async (req, res) => {
       watchlist: [],
     });
     try {
-      // if successful, save user to DB and send the get user by ID route
+      // if successful, save user to DB
       user = await user.save();
       res.send("logged in");
     } catch (err) {
@@ -72,11 +67,16 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res, next) => {
   const foundUser = await User.findOne({ username: req.body.username }).exec();
   if (!foundUser) {
-    return res.status(404).json({ message: `No user found with that username` });
+    return res
+      .status(404)
+      .json({ message: `No user found with that username` });
   }
-
-  const matchPasswords = bcrypt.compareSync(req.body.password, foundUser.password);
-
+  // verifies the hashed password in DB with the user input
+  const matchPasswords = bcrypt.compareSync(
+    req.body.password,
+    foundUser.password
+  );
+  // if passwords match, log in and send token to client
   if (matchPasswords) {
     const token = jwt.sign(
       {
@@ -91,7 +91,8 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-// ----- WATCHLIST ROUTES -----
+
+// ----- WATCHLIST ROUTES ----- //
 
 // GET user watchlist
 router.get("/watchlist", authorize, async (req, res) => {
@@ -113,10 +114,10 @@ router.put("/watchlist", authorize, async (req, res) => {
         ],
       },
     }
-    );
-    const userObject = await User.findOne({ username: req.tokenData.username });
-    res.status(200).json(userObject.watchlist);
-  });
+  );
+  const userObject = await User.findOne({ username: req.tokenData.username });
+  res.status(200).json(userObject.watchlist);
+});
 
 // DELETE stock from watchlist
 router.put("/watchlist/:symbol", authorize, async (req, res) => {
@@ -126,13 +127,13 @@ router.put("/watchlist/:symbol", authorize, async (req, res) => {
       $pull: {
         watchlist: {
           symbol: req.body.symbol,
-          name: req.body.name
+          name: req.body.name,
         },
-      }
-    },
+      },
+    }
   );
   const userObject = await User.findOne({ username: req.tokenData.username });
   res.status(200).json(userObject.watchlist);
-  });
+});
 
 module.exports = router;

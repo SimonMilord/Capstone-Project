@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./stockItem.scss";
 import axios from "axios";
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
@@ -11,8 +11,8 @@ export default class StockItem extends Component {
     stockQuote: {},
     stockInfo: {
       symbol: this.props.symbol,
-      name: this.props.name
-    }
+      name: this.props.name,
+    },
   };
 
   componentDidMount() {
@@ -47,7 +47,7 @@ export default class StockItem extends Component {
 
   deleteStock = () => {
     this.props.deleteItem(this.state.stockInfo);
-  }
+  };
 
   render() {
     const data = this.state.stockQuote;
@@ -75,7 +75,12 @@ export default class StockItem extends Component {
             </div>
           </div>
         </div>
-        <button className="stock__delBtn" type="submit" value={this.state.stockInfo} onClick={this.deleteStock}>
+        <button
+          className="stock__delBtn"
+          type="submit"
+          value={this.state.stockInfo}
+          onClick={this.deleteStock}
+        >
           <ClearOutlinedIcon />
         </button>
       </div>

@@ -3,16 +3,15 @@
 @import "../../styles/partials/variables";
 
 .signUpPage {
-  @include display-flex(column,center,center);
+  @include display-flex(column, center, center);
   @include backgroundGradient;
-
 
   .signup {
     @include authCard;
-    @include display-flex(column,center,center);
+    @include display-flex(column, center, center);
 
     &__logo {
-      @include display-flex(column,center,center);
+      @include display-flex(column, center, center);
       margin-bottom: 2rem;
     }
     &__img {
@@ -24,7 +23,7 @@
       font-size: $logo-font-size;
     }
     &__form {
-      @include display-flex(column,center,center);
+      @include display-flex(column, center, center);
       width: 100%;
     }
 

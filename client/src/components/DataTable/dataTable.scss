@@ -9,7 +9,7 @@
     border: 1px solid $border-color;
     border-radius: $radius;
     padding: 2rem;
-    @include display-flex(row,space-evenly,flex-start);
+    @include display-flex(row, space-evenly, flex-start);
 
     &-left {
       @include tablet {
@@ -24,10 +24,10 @@
   }
 
   &-tooltip-wrap {
-    @include display-flex(row,space-between,center);
+    @include display-flex(row, space-between, center);
   }
   &__item {
-    @include display-flex(row,space-between,center);
+    @include display-flex(row, space-between, center);
     padding: 1rem 0.5rem;
     border-top: 1px solid $light-border-color;
 
@@ -37,7 +37,6 @@
   }
 
   &__value {
-
     &--buy {
       color: $rec-color-buy;
     }

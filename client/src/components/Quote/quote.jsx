@@ -6,7 +6,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
 export default function Quote(props) {
-
   // Converts the exchange name to their accronyms
   const findExchange = (param) => {
     switch (param) {
@@ -20,7 +19,7 @@ export default function Quote(props) {
         return "N/A";
     }
   };
-  // handler function to add stock to watchlist
+
   const addStock = () => {
     props.addBtn();
   };
@@ -34,7 +33,9 @@ export default function Quote(props) {
       <div className="quote__top">
         <div className="quote__company">
           <div className="quote__ticker">
-            <div className="quote__symbol">{props.profile.ticker}&nbsp;-&nbsp;</div>
+            <div className="quote__symbol">
+              {props.profile.ticker}&nbsp;-&nbsp;
+            </div>
             <div className="quote__name">{props.profile.name}</div>
           </div>
           <div className="quote__exchange">

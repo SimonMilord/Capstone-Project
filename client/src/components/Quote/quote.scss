@@ -4,7 +4,7 @@
 
 .quote {
   &__top {
-    @include display-flex(row,space-between,center);
+    @include display-flex(row, space-between, center);
     margin-bottom: 1.5rem;
     @include tablet {
       border-bottom: 1px solid $border-color;
@@ -31,7 +31,7 @@
   }
   &__btn {
     @include btn;
-    @include display-flex(row,center,center);
+    @include display-flex(row, center, center);
     .quote__textBtn {
       color: $global-white;
     }
@@ -43,8 +43,8 @@
     }
   }
   &__bottom {
-    @include display-flex(row,flex-start,center);
-    width:100%;
+    @include display-flex(row, flex-start, center);
+    width: 100%;
     div {
       margin-right: 1rem;
     }

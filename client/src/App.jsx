@@ -11,6 +11,7 @@ export default class App extends Component {
     searchedQuote: "",
   };
 
+  // passes the quote searched on watchlistpage to mainpage
   handleSearchedQuote = (quote) => {
     this.setState({
       searchedQuote: quote,
@@ -26,11 +27,7 @@ export default class App extends Component {
               <Route
                 path="/"
                 exact
-                render={(routerProps) => (
-                  <LoginPage
-                    {...routerProps}
-                  />
-                )}
+                render={(routerProps) => <LoginPage {...routerProps} />}
               />
               <Route
                 path="/login"
@@ -39,9 +36,13 @@ export default class App extends Component {
               />
               <Route
                 path="/main"
-                render={(routerProps) => <MainPage {...routerProps}
-                searchedQuote={this.state.searchedQuote}
-                />}
+                exact
+                render={(routerProps) => (
+                  <MainPage
+                    {...routerProps}
+                    searchedQuote={this.state.searchedQuote}
+                  />
+                )}
               />
               <Route
                 path="/signup"

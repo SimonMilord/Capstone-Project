@@ -9,6 +9,7 @@ import TimeSelector from "../../components/TimeSelector/timeSelector";
 import FooterMain from "../../components/Footer/footerMain";
 import NewsSection from "../../components/NewsSection/newsSection";
 
+// global variables
 const URL = process.env.REACT_APP_API_URL;
 const KEY = process.env.REACT_APP_API_KEY;
 const serverURL = process.env.REACT_APP_SERVER_URL;
@@ -64,23 +65,24 @@ export default class MainPage extends Component {
     }
     this.getStockProfile(this.state.stock);
     this.getStockQuote(this.state.stock);
-    this.getStockPriceData(this.state.stock, defaultTime); // Data required for the chart
+    this.getStockPriceData(this.state.stock, defaultTime);
     this.getStockFinancials(this.state.stock);
     this.getStockRatings(this.state.stock);
     this.getStockNews(this.state.stock, fromNews, toNews);
     this.getWatchlist();
   }
 
-  // ----- HANDLER FUNCTIONS -----
+  // ----- HANDLER FUNCTIONS -----//
+
   // functions that call API request functions once a stock is searched
   handleQuoteData = async (quote) => {
     await this.setState({ stock: quote });
     if (!this.state.stock) {
-      this.setState({stockNotFound: true});
+      this.setState({ stockNotFound: true });
     }
     this.getStockProfile(this.state.stock);
     this.getStockQuote(quote);
-    this.getStockPriceData(quote, this.state.fromPeriod); // Data required for the chart
+    this.getStockPriceData(quote, this.state.fromPeriod);
     this.getStockFinancials(quote);
     this.getStockRatings(quote);
     this.getStockNews(quote, fromNews, toNews);
@@ -99,7 +101,7 @@ export default class MainPage extends Component {
     );
   };
 
-  // function to add stock to watchlist
+  // handles adding stock to watchlist
   handleAddStock = () => {
     axios
       .put(
@@ -133,7 +135,7 @@ export default class MainPage extends Component {
         console.log(err);
       });
   };
-
+  // handles removing stock to watchlist
   handleRemoveStock = (symbol) => {
     axios
       .put(
@@ -167,7 +169,7 @@ export default class MainPage extends Component {
         console.log(err);
       });
   };
-
+  // fetches the watchlist of a user
   getWatchlist = () => {
     axios
       .get(`${serverURL}/watchlist`, {
@@ -190,28 +192,13 @@ export default class MainPage extends Component {
         this.setState({
           userWatchlist: response.data,
         });
-        // this.getStockProfile(this.state.stock);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // ----- API CALLS -----
-  // API call to get Name and symbol of the company - SYMBOL LOOKUP
-  // getStockName(symbol) {
-  //   axios
-  //     .get(`${URL}/search?q=${symbol}&token=${KEY}`)
-  //     .then((res) => {
-  //       this.setState({
-  //         stockName: res.data.result[0].description,
-  //         stock: res.data.result[0].symbol,
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
+  // ----- API CALLS ----- //
 
   // API call to get current price, percent change and $ change - QUOTE
   getStockQuote(symbol) {
@@ -256,13 +243,11 @@ export default class MainPage extends Component {
     axios
       .get(`${URL}/stock/profile2?symbol=${symbol}&token=${KEY}`)
       .then((res) => {
-        this.setState(
-          {
-            stock: res.data.ticker,
-            stockName: res.data.name,
-            stockProfile: res.data,
-          }
-        );
+        this.setState({
+          stock: res.data.ticker,
+          stockName: res.data.name,
+          stockProfile: res.data,
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -277,8 +262,7 @@ export default class MainPage extends Component {
         this.setState({
           stockRatings: res.data[0],
         });
-        // cleaning up the array of analyst ratings and
-        // aggregating values for readability
+        // cleaning up the array of ratings and aggregating values for readability
         let arr = Object.values(this.state.stockRatings);
         arr.splice(2, 1);
         arr.pop();

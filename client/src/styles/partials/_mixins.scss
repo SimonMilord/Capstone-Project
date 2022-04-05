@@ -14,7 +14,6 @@
 @mixin wrapper {
   max-width: $wrapper-width;
   position: relative;
-  // height: 100vh;
   margin: 0 auto;
   width: 100%;
 
@@ -23,7 +22,7 @@
   }
 }
 
-// Other mixins:
+// General mixins:
 
 @mixin display-flex($direction, $justify, $align) {
   display: flex;
@@ -39,6 +38,8 @@
   }
 }
 
+// Login/signup pages background
+
 @mixin backgroundAnimation {
   @keyframes gradient {
     0% {
@@ -52,6 +53,8 @@
     }
   }
 }
+
+// Components mixins
 
 @mixin backgroundGradient {
   background: linear-gradient(

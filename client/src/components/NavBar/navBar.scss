@@ -84,7 +84,7 @@
         margin: 0;
       }
       .mobile__link {
-        color: #4379ff;
+        color: $main-color;
         text-decoration: none;
         font-size: $main-font-size;
         @include tablet {

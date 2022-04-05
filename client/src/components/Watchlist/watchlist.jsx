@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./watchlist.scss";
 import StockItem from "../StockItem/stockItem";
 import axios from "axios";
-import AddIcon from '@mui/icons-material/Add';
-import  { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import AddIcon from "@mui/icons-material/Add";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 let clientAuthToken = sessionStorage.getItem("clientAuthToken");
 const serverURL = process.env.REACT_APP_SERVER_URL;
@@ -12,6 +12,7 @@ const serverURL = process.env.REACT_APP_SERVER_URL;
 export default function Watchlist(props) {
   const [currentWatchlist, setcurrentWatchlist] = useState([]);
 
+  // handles drag and drop feature
   function handleOnDragEnd(result) {
     if (!result.destination) return;
     const items = Array.from(currentWatchlist);
@@ -26,28 +27,31 @@ export default function Watchlist(props) {
 
   function getWatchlist() {
     axios
-    .get(`${serverURL}/watchlist`, {
-      headers: {
-        authorization: `Bearer ${clientAuthToken}`,
-      },
-    })
-    .then((response) => {
-      setcurrentWatchlist(response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .get(`${serverURL}/watchlist`, {
+        headers: {
+          authorization: `Bearer ${clientAuthToken}`,
+        },
+      })
+      .then((response) => {
+        setcurrentWatchlist(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleDeleteStock(stockQuote) {
-    axios.put(`${serverURL}/watchlist/${stockQuote.symbol}`,
+    axios
+      .put(
+        `${serverURL}/watchlist/${stockQuote.symbol}`,
         {
           symbol: stockQuote.symbol,
-          name: stockQuote.name
-        }, {
+          name: stockQuote.name,
+        },
+        {
           headers: {
             authorization: `Bearer ${clientAuthToken}`,
-          }
+          },
         }
       )
       .then((response) => {
@@ -56,8 +60,7 @@ export default function Watchlist(props) {
       .catch((err) => {
         console.log(err);
       });
-    }
-
+  }
 
   return (
     <div className="watchlist">
@@ -65,7 +68,7 @@ export default function Watchlist(props) {
         <h1 className="watchlist__title">Watchlist</h1>
         <Link to="/" className="watchlist__link">
           <div className="watchlist__btn">
-            <AddIcon style={{ fill: 'white' }} />
+            <AddIcon style={{ fill: "white" }} />
             <p className="watchlist__textBtn">Add to watchlist</p>
           </div>
         </Link>
@@ -91,23 +94,36 @@ export default function Watchlist(props) {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="items">
           {(provided) => (
-          <ul className="watchlist__list" {...provided.droppableProps} ref={provided.innerRef}>
-            {currentWatchlist &&
-              currentWatchlist.map((stockItem, index) => (
-                <Draggable key={stockItem.symbol} draggableId={stockItem.symbol} index={index}>
-                  {(provided) => (
-                    <li className="watchlist__item" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                      <StockItem
-                        symbol={stockItem.symbol}
-                        name={stockItem.name}
-                        deleteItem={handleDeleteStock}
-                      />
-                    </li>
-                  )}
-                </Draggable>
-              ))}
+            <ul
+              className="watchlist__list"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {currentWatchlist &&
+                currentWatchlist.map((stockItem, index) => (
+                  <Draggable
+                    key={stockItem.symbol}
+                    draggableId={stockItem.symbol}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <li
+                        className="watchlist__item"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <StockItem
+                          symbol={stockItem.symbol}
+                          name={stockItem.name}
+                          deleteItem={handleDeleteStock}
+                        />
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
               {provided.placeholder}
-          </ul>
+            </ul>
           )}
         </Droppable>
       </DragDropContext>

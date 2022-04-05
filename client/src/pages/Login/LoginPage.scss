@@ -3,15 +3,15 @@
 @import "../../styles/partials/variables";
 
 .loginPage {
-  @include display-flex(column,center,center);
+  @include display-flex(column, center, center);
   @include backgroundGradient;
 
   .login {
     @include authCard;
-    @include display-flex(column,center,center);
+    @include display-flex(column, center, center);
 
     &__logo {
-      @include display-flex(column,center,center);
+      @include display-flex(column, center, center);
       margin-bottom: 2rem;
     }
     &__title {
@@ -23,7 +23,7 @@
       margin-bottom: 1rem;
     }
     &__form {
-      @include display-flex(column,center,center);
+      @include display-flex(column, center, center);
       width: 100%;
     }
 

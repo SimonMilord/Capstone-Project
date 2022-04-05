@@ -56,7 +56,8 @@
     cursor: pointer;
 
     &:hover {
-      filter: invert(17%) sepia(81%) saturate(5861%) hue-rotate(357deg) brightness(95%) contrast(121%);
+      filter: invert(17%) sepia(81%) saturate(5861%) hue-rotate(357deg)
+        brightness(95%) contrast(121%);
     }
   }
 }

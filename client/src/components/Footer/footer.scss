@@ -2,28 +2,26 @@
 @import "../../styles/partials/mixins";
 @import "../../styles/partials/variables";
 
-
 .footer {
   position: absolute;
   bottom: 0;
   padding: 1rem;
   height: 3.75rem;
   width: 100%;
-  @include display-flex(row,space-between,center);
+  @include display-flex(row, space-between, center);
   @include tablet {
-    @include display-flex(row,flex-end,center);
+    @include display-flex(row, flex-end, center);
     padding: 1rem 2rem;
   }
   &__box {
     margin-left: 0.5rem;
-
   }
   &__link {
     margin-left: 0.5rem;
-
   }
   &__img {
     height: 32px;
-    filter: invert(24%) sepia(0%) saturate(1402%) hue-rotate(202deg) brightness(97%) contrast(85%);
+    filter: invert(24%) sepia(0%) saturate(1402%) hue-rotate(202deg)
+      brightness(97%) contrast(85%);
   }
 }
