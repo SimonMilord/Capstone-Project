@@ -38,6 +38,10 @@ const authorize = (req, res, next) => {
 
 // ------ USER ROUTES ----- //
 
+// GET route for testing in deployment:
+
+router.get('/test', (req, res) => { res.send('Hello from Express!')});
+
 // GET a user by ID
 router.get("/", authorize, (req, res) => {
   res.json(req.tokenData);
