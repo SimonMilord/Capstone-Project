@@ -8,7 +8,7 @@ The stock market and the world of investments is one that is gatekept by unneces
 
 ## Demo
 
-[Click here](insert link here) to see the live demo
+[Click here](https://stonkers.netlify.app/) to see the live demo
 
 ## Tech Stack
 Client:
