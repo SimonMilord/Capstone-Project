@@ -12,10 +12,7 @@ The stock market and the world of investments is one that is gatekept by unneces
 
 ## Screenshots
 
-<img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Login.png" width=50% height=50%>
-<img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Top.png" width=50% height=50%>
-<img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Bottom.png" width=50% height=50%>
-<img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20watchlist.png" width=50% height=50%>
+<img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Login.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Top.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Bottom.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20watchlist.png" width=50% height=50%>
 
 
 ## Tech Stack
