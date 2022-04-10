@@ -36,6 +36,7 @@ API: [Finnhub](https://finnhub.io/)
 Add the following variables in client .ENV file
 
 Client: 
+
 REACT_APP_API_URL=https://finnhub.io/api/v1
 
 REACT_APP_API_KEY=<enter your api key>
@@ -45,6 +46,7 @@ REACT_APP_SERVER_URL=http://localhost:8080/user
 REACT_APP_JWT_SECRET=<enter your jwt secret>
   
 Server:
+  
 PORT = 8080
   
 JWT_SECRET=<enter your JWT secret>
