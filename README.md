@@ -1,6 +1,13 @@
 # Stonkers Stock Tracking App
 
-Stonkers is a fully responsive web app that allows the user, once logged in to their account, to look up quotes, charts, news and stats of stocks. It also allows the user to add their favorite stocks to a watchlist for them to keep track of.
+Stonkers is a fully responsive stock tracking web application with the following features:
+
+* Server-side authentication with JWT
+* Looking up stock quotes by ticker
+* Charting of stock prices with Charts.js
+* News and financial data through the Finnhub API
+* Adding and deleting stocks to a user's watchlist
+* Storing user data on cloud-based database using MongoDB
 
 ## The Problem
 
@@ -92,6 +99,13 @@ Install server dependencies
 Start the client
 <br>
 `$ npm start`
+
+
+## Tradeoffs and Next Steps
+Given the time constraints, I had to prioritize my feature set. As I continue to develop the app, I would like to implement the following features:
+
+* Holdings page to add a user's stocks
+* Searching stocks by company name
 
 
 ## Contact
