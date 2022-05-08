@@ -10,6 +10,10 @@ The stock market and the world of investments is one that is gatekept by unneces
 
 [Click here](https://stonkers.netlify.app/) to see the live demo
 
+## Video Presentation
+
+Uploading Simon_Milord capstone_demo_stonkers.mp4…
+
 ## Screenshots
 
 <img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Login.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Top.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20Home%20Bottom.png" width=50% height=50%><img src="https://github.com/SimonMilord/Capstone-Project/blob/f1e3ddfa87636d26eadaceb042386ce8cde9a21b/Screenshots/Stonkers%20-%20watchlist.png" width=50% height=50%>
@@ -43,40 +47,51 @@ Add the following variables in client .ENV file
 Client: 
 
 REACT_APP_API_URL=https://finnhub.io/api/v1
-REACT_APP_API_KEY=<enter your api key>
+<br>
+REACT_APP_API_KEY= enter your api key
+<br>
 REACT_APP_SERVER_URL=http://localhost:8080/user
-REACT_APP_JWT_SECRET=<enter your jwt secret>
+<br>
+REACT_APP_JWT_SECRET= enter your jwt secret
   
 Server:
   
 PORT = 8080
-JWT_SECRET=<enter your JWT secret>
+<br>
+JWT_SECRET= enter your JWT secret
   
 You can generate JWT secrets [here](https://jwt.io/)
 
 ## Usage
 To run this project locally, follow these steps:
 
-clone the repository
-$ git clone https://github.com/SimonMilord/Capstone-Project.git
+Clone the repository
+<br>
+`$ git clone https://github.com/SimonMilord/Capstone-Project.git`
 
-go into the server
-$ cd capstone/server
+Go into the server
+<br>
+`$ cd capstone/server`
 
-install server dependencies
-$ npm install
+Install server dependencies
+<br>
+`$ npm install`
 
-start the server
-$ node index.js
+Start the server
+<br>
+`$ node index.js`
 
-go into the client
-$ cd ../client
+Go into the client
+<br>
+`$ cd ../client`
 
-install server dependencies
-$ npm install
+Install server dependencies
+<br>
+`$ npm install`
 
-start the client
-$ npm start
+Start the client
+<br>
+`$ npm start`
 
 
 ## Contact
