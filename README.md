@@ -12,7 +12,7 @@ The stock market and the world of investments is one that is gatekept by unneces
 
 ## Video Presentation
 
-Uploading Simon_Milord capstone_demo_stonkers.mp4…
+[Click here](https://drive.google.com/file/d/1riNs6ycUS4Dh_Sr36Aj94hKCYj2Nzg_Y/view?usp=sharing) to see the presentation
 
 ## Screenshots
 
