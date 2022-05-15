@@ -106,6 +106,8 @@ Given the time constraints, I had to prioritize my feature set. As I continue to
 
 * Holdings page to add a user's stocks
 * Searching stocks by company name
+* Loading states
+* Extra validation for the signup page
 
 
 ## Contact
